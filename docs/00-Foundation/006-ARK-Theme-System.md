@@ -1,10 +1,10 @@
-# ATH-STD-005
+# ATH-STD-006
 
 # ARK Theme System
 
 ---
 
-Document ID: ATH-STD-005
+Document ID: ATH-STD-006
 
 Title: ARK Theme System
 
