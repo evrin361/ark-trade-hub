@@ -1,17 +1,15 @@
-import { Button } from "@/components/ui/Button";
+import { AppPage } from "@/components/ui/AppPage";
+import { Panel } from "@/components/ui/Panel";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center gap-4 bg-black">
-      <Button>Primary</Button>
-
-      <Button variant="secondary">
-        Secondary
-      </Button>
-
-      <Button variant="danger">
-        Danger
-      </Button>
-    </main>
+    <AppPage
+      title="ARK Trade Hub"
+      description="Dashboard"
+    >
+      <Panel>
+        <p>Welcome to ARK Trade Hub</p>
+      </Panel>
+    </AppPage>
   );
 }
