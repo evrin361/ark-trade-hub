@@ -10,9 +10,10 @@ export function Card({
   return (
     <div
       className={`
-        ${cardRecipe(variant)}
-        ${className}
-      `}
+  ${cardRecipe(variant)}
+  p-6
+  ${className}
+`}
       {...props}
     >
       {children}

@@ -1,10 +1,6 @@
-import type { ReactNode } from "react";
+import type { PageHeaderProps } from "./PageHeader.types";
+import { pageHeaderRecipe } from "@/config/theme/recipes/page-header";
 
-interface PageHeaderProps {
-  title: string;
-  description?: string;
-  actions?: ReactNode;
-}
 
 export function PageHeader({
   title,
@@ -12,13 +8,24 @@ export function PageHeader({
   actions,
 }: PageHeaderProps) {
   return (
-    <div className="flex items-start justify-between gap-6 border-b pb-6">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold">{title}</h1>
+<div className={pageHeaderRecipe()}>
+          <div className="space-y-2 text-right">
+        <h1
+  className="
+    text-3xl
+    font-bold
+    text-[var(--text-primary)]
+  "
+>{title}</h1>
 
         {description && (
-          <p className="text-sm opacity-70">
-            {description}
+<p
+  className="
+    text-sm
+    text-[var(--text-secondary)]
+  "
+>      
+      {description}
           </p>
         )}
       </div>

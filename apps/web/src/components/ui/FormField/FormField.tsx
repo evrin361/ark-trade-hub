@@ -1,10 +1,6 @@
-import type { ReactNode } from "react";
+import type { FormFieldProps } from "./FormField.types";
 
-interface FormFieldProps {
-  label: string;
-  required?: boolean;
-  children: ReactNode;
-}
+
 
 export function FormField({
   label,
@@ -13,11 +9,17 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium">
-        {label}
+<label
+  className="
+    block
+    text-sm
+    font-medium
+    text-[var(--text-primary)]
+  "
+>        {label}
 
         {required && (
-          <span className="mr-1 text-red-500">
+          <span className="mr-1 text-[var(--danger)]">
             *
           </span>
         )}

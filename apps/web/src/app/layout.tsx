@@ -2,6 +2,27 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import { AppShell } from "@/components/layout/AppShell";
+import localFont from "next/font/local";
+
+const vazirmatn = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Vazirmatn-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Vazirmatn-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-vazir",
+});
+
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,10 +45,14 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+lang="fa"
+dir="rtl"
+className={`${geistSans.variable} ${geistMono.variable} ${vazirmatn.variable} h-full antialiased`}    >
+      <body className="min-h-full flex flex-col font-[family-name:var(--font-vazir)]">
+<AppShell>
+  {children}
+</AppShell>
+</body>
     </html>
   );
 }

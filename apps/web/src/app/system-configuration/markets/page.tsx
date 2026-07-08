@@ -1,5 +1,10 @@
-import { MarketsPage } from "@/features/system-configuration/pages/MarketsPage";
+import { AppLayout } from "@/components/layout/AppLayout";
+import { MarketsPage } from "@/features/system-configuration";
 
 export default function Page() {
-  return <MarketsPage />;
+  return (
+    <AppLayout>
+      <MarketsPage />
+    </AppLayout>
+  );
 }

@@ -25,9 +25,9 @@ export function AppPage({
         actions={actions}
       />
 
-      <Panel>
+    
         {children}
-      </Panel>
+      
 
     </main>
   );

@@ -15,4 +15,44 @@ export const ProviderService = {
       (provider) => provider.marketId === marketId
     );
   },
+
+  getById(id: string): Provider | undefined {
+    return this.getAll().find(
+      (provider) => provider.id === id
+    );
+  },
+
+
+  create(
+    providers: Provider[],
+    data: {
+      name: string;
+      code: string;
+      marketId: string;
+    }
+  ): Provider[] {
+
+    const now = new Date();
+
+    const newProvider: Provider = {
+      id: crypto.randomUUID(),
+
+      marketId: data.marketId,
+
+      name: data.name,
+
+      code: data.code,
+
+      order: providers.length + 1,
+
+      enabled: true,
+
+      createdAt: now,
+
+      updatedAt: now,
+    };
+
+    return [...providers, newProvider];
+  },
+
 };

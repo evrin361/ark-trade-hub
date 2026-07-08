@@ -10,9 +10,15 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { MarketService } from "../markets/services/market.service";
 import { useMarkets } from "../markets/hooks/useMarkets";
 import { Input } from "@/components/ui/Input";
+import {
+  Plus,
+  Pencil,
+  Save,
+  X,
+} from "lucide-react";
 
 export function MarketsPage() {
-const { markets, addMarket } = useMarkets();
+const { markets, createMarket } = useMarkets();
 
 const [name, setName] = useState("");
 
@@ -20,23 +26,29 @@ const [code, setCode] = useState("");
 
 const [showForm, setShowForm] = useState(false);
 
+const [editingId, setEditingId] = useState<string | null>(null);
+
   return (
     <AppPage
       title="مدیریت بازارها"
       description="بازارهای قابل پشتیبانی سیستم"
 actions={
-  <Button onClick={() => setShowForm((v) => !v)}>
-    {showForm ? "بستن" : "افزودن بازار"}
-  </Button>
+<Button
+  className="flex items-center gap-2"
+  onClick={() => setShowForm((v) => !v)}
+>
+  {showForm ? <X size={18} /> : <Plus size={18} />}
+
+  {showForm ? "بستن" : "افزودن بازار"}
+</Button>
 }    >
 
 {showForm && (
-  <Card>
-    <div className="space-y-4">
+<Card className="text-right">
+        <div className="space-y-6">
 
-      <h2 className="text-lg font-semibold">
-        بازار جدید
-      </h2>
+      <h2 className="text-xl font-bold text-white">
+{editingId ? "ویرایش بازار" : "بازار جدید"}      </h2>
 
       <div className="grid gap-4 md:grid-cols-2">
 
@@ -45,9 +57,10 @@ actions={
           required
         >
 <Input
+    className="text-left ltr"
     value={name}
     onChange={(e) => setName(e.target.value)}
-    placeholder="مثلاً: بازار ارزهای دیجیتال"
+    placeholder="مثلاً: Cryptocurrency"
 />
         </FormField>
 
@@ -56,6 +69,7 @@ actions={
           required
         >
 <Input
+    className="text-left ltr"
     value={code}
     onChange={(e) => setCode(e.target.value)}
     placeholder="مثلاً: crypto"
@@ -64,57 +78,141 @@ actions={
 
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end pt-2">
+
+
+
+
+
+        
 
 <Button
-    onClick={() => {
+  className="min-w-[150px] flex items-center gap-2"
+  onClick={() => {
 
         if (!name.trim()) return;
 
         if (!code.trim()) return;
 
-        addMarket({
-            name,
-            code,
-        });
+if (editingId) {
+  // فعلاً خالی
+} else {
+  createMarket({
+    name,
+    code,
+  });
+}
 
-        setName("");
+setName("");
 
-        setCode("");
+setCode("");
 
-        setShowForm(false);
+setEditingId(null);
 
-    }}
+setShowForm(false);
+   }}
 >
-    ذخیره بازار
+  <Save size={16} />
+  {editingId ? "ذخیره تغییرات" : "ذخیره بازار"}
 </Button>
-
       </div>
 
     </div>
   </Card>
 )}
 
-      <div className="space-y-4">
+      <div className="space-y-6">
 
         {markets.map((market) => (
-          <Card key={market.id}>
-            <div className="flex items-center justify-between">
-              <div className="space-y-2">
-                <h2 className="text-lg font-semibold">
-                  {market.name}
-                </h2>
+<Card
+  key={market.id}
+  className="
+    px-8
+    py-8
+    flex
+    flex-col
+    min-h-[300px]
+  "
+>
+   
+      <div className="space-y-6">
+             <div className="space-y-5">
 
-                <p className="text-sm opacity-70">
-                  {market.code}
-                </p>
+  <div>
+    <div className="mb-1 text-xs uppercase tracking-[0.25em] text-cyan-300/70">
+      بازار
+    </div>
 
-                <StatusBadge active={market.enabled} />
-              </div>
+    <h2 className="text-2xl font-bold text-white">
+      {market.name}
+    </h2>
+  </div>
 
-              <Button variant="secondary">
-                ویرایش
-              </Button>
+  <div>
+
+    <div className="mb-1 text-xs uppercase tracking-[0.25em] text-slate-500">
+      کد
+    </div>
+
+    <div
+      className="
+        inline-flex
+        rounded-lg
+        bg-black/20
+        px-3
+        py-1.5
+
+        font-mono
+        text-sm
+        tracking-wider
+        text-cyan-300
+
+        ltr
+      "
+    >
+      {market.code}
+    </div>
+
+  </div>
+
+  <div>
+
+    <div className="mb-1 text-xs uppercase tracking-[0.25em] text-slate-500">
+      Status
+    </div>
+
+    <StatusBadge active={market.enabled} />
+  </div>
+
+
+
+
+</div>
+
+<div
+  className="
+    mt-auto
+    pt-6
+    border-t
+    border-white/5
+    flex
+    justify-end
+  "
+>
+<Button
+  variant="secondary"
+  className="shrink-0 px-5 flex items-center gap-2"
+  onClick={() => {
+    setEditingId(market.id);
+    setName(market.name);
+    setCode(market.code);
+    setShowForm(true);
+  }}
+>
+  <Pencil size={16} />
+  ویرایش
+</Button></div>
+
             </div>
           </Card>
         ))}

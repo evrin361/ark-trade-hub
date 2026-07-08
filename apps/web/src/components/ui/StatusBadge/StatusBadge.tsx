@@ -1,6 +1,5 @@
-interface StatusBadgeProps {
-  active: boolean;
-}
+import type { StatusBadgeProps } from "./StatusBadge.types";
+
 
 export function StatusBadge({
   active,
@@ -11,8 +10,18 @@ export function StatusBadge({
         "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold",
 
         active
-          ? "bg-green-100 text-green-700"
-          : "bg-red-100 text-red-700",
+  ? `
+      bg-[var(--success)]/15
+      text-[var(--success)]
+      border
+      border-[var(--success)]/30
+    `
+  : `
+      bg-[var(--danger)]/15
+      text-[var(--danger)]
+      border
+      border-[var(--danger)]/30
+    `,
       ].join(" ")}
     >
       {active ? "فعال" : "غیرفعال"}

@@ -12,23 +12,44 @@ export function cardRecipe(
 
   const variants: Record<CardVariant, string> = {
     default: `
-      bg-slate-900
-      border-slate-700
-      text-white
-    `,
+  bg-white/[0.04]
 
-    elevated: `
-      bg-slate-800
-      border-slate-600
-      shadow-lg
-      text-white
-    `,
+  backdrop-blur-xl
+
+  border
+  border-white/10
+
+  shadow-[0_8px_30px_rgba(0,0,0,0.25)]
+
+  text-[var(--text-primary)]
+
+  hover:border-[var(--primary)]/30
+
+  hover:shadow-[0_0_25px_rgba(0,212,255,0.10)]
+`,
+
+elevated: `
+  bg-white/[0.06]
+
+  backdrop-blur-xl
+
+  border
+  border-white/10
+
+  shadow-[0_15px_45px_rgba(0,0,0,0.35)]
+
+  text-[var(--text-primary)]
+
+  hover:border-[var(--primary)]/40
+
+  hover:shadow-[0_0_35px_rgba(0,212,255,0.18)]
+`,
 
     flat: `
-      bg-transparent
-      border-transparent
-      text-white
-    `,
+  bg-transparent
+  border-transparent
+  text-[var(--text-primary)]
+`,
   };
 
   return `${base} ${variants[variant]}`;

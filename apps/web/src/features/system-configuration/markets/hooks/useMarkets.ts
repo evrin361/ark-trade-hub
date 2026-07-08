@@ -13,29 +13,17 @@ export function useMarkets() {
     MarketService.getAll()
   );
 
-  function addMarket(data: CreateMarketDto) {
-    setMarkets((current) => [
-      ...current,
-      {
-    id: crypto.randomUUID(),
+  
 
-    name: data.name,
-
-    code: data.code,
-
-    enabled: true,
-
-    order: markets.length + 1,
-
-    createdAt: new Date(),
-
-updatedAt: new Date(),
+function createMarket(data: CreateMarketDto) {
+  setMarkets((current) =>
+    MarketService.create(current, data)
+  );
 }
-    ]);
-  }
 
-  return {
-    markets,
-    addMarket,
-  };
+return {
+  markets,
+  createMarket,
+};
+
 }
