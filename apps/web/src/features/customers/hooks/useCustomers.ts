@@ -29,12 +29,14 @@ export function useCustomers() {
 
     async function loadCustomers() {
 
-      const data =
-        await customerService.getAll();
+      const result =
+  await customerService.refresh();
 
-      setCustomers(data);
+if (result.success) {
+  setCustomers(result.data);
+}
 
-      setLoading(false);
+setLoading(false);
     }
 
 
@@ -48,15 +50,17 @@ export function useCustomers() {
     data: CreateCustomerDto
   ) {
 
-    const customer =
-      await customerService.create(data);
+const result =
+  await customerService.create(data);
 
+if (!result.success) {
+  return;
+}
 
-    setCustomers((current) => [
-      ...current,
-      customer,
-    ]);
-  }
+setCustomers((current) => [
+  ...current,
+  result.data,
+]);  }
 
 
 
@@ -65,23 +69,25 @@ export function useCustomers() {
     data: CreateCustomerDto
   ) {
 
-    const updated =
-      await customerService.update(
-        id,
-        data
-      );
+const result =
+  await customerService.update(
+    id,
+    data
+  );
 
 
-    if (!updated) return;
+if (!result.success) {
+  return;
+}
 
 
-    setCustomers((current) =>
-      current.map((customer) =>
-        customer.id === id
-          ? updated
-          : customer
-      )
-    );
+setCustomers((current) =>
+  current.map((customer) =>
+    customer.id === id
+      ? result.data
+      : customer
+  )
+);
   }
 
 
@@ -90,43 +96,47 @@ export function useCustomers() {
     id: string
   ) {
 
-    const updated =
-      await customerService.archive(id);
+const result =
+  await customerService.archive(id);
 
 
-    if (!updated) return;
+if (!result.success) {
+  return;
+}
 
 
-    setCustomers((current) =>
-      current.map((customer) =>
-        customer.id === id
-          ? updated
-          : customer
-      )
-    );
+setCustomers((current) =>
+  current.map((customer) =>
+    customer.id === id
+      ? result.data
+      : customer
+  )
+);
   }
 
 
 
   async function restoreCustomer(
-    id: string
-  ) {
+  id: string
+) {
 
-    const updated =
-      await customerService.restore(id);
-
-
-    if (!updated) return;
+  const result =
+    await customerService.restore(id);
 
 
-    setCustomers((current) =>
-      current.map((customer) =>
-        customer.id === id
-          ? updated
-          : customer
-      )
-    );
+  if (!result.success) {
+    return;
   }
+
+
+  setCustomers((current) =>
+    current.map((customer) =>
+      customer.id === id
+        ? result.data
+        : customer
+    )
+  );
+}
 
 
 
@@ -150,20 +160,22 @@ export function useCustomers() {
     }
 
 
-    const updated =
-      await customerService.toggleStatus(id);
+    const result =
+  await customerService.toggleStatus(id);
 
 
-    if (!updated) return;
+if (!result.success) {
+  return;
+}
 
 
-    setCustomers((current) =>
-      current.map((customer) =>
-        customer.id === id
-          ? updated
-          : customer
-      )
-    );
+setCustomers((current) =>
+  current.map((customer) =>
+    customer.id === id
+      ? result.data
+      : customer
+  )
+);
   }
 
 

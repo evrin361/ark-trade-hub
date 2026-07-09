@@ -1,33 +1,82 @@
 import type { Customer } from "../types/customer";
 import type { CustomerRepository } from "../repositories/customer.repository";
 
+type ServiceResult<T> =
+  | {
+      success: true;
+      data: T;
+    }
+  | {
+      success: false;
+      error: string;
+    };
+
 export function createCustomerService(
   repository: CustomerRepository
 ) {
   return {
 
-  async getAll(): Promise<Customer[]> {
-    return repository.getAll();
-  },
+  async getAll(): Promise<ServiceResult<Customer[]>> {
+  try {
+    const customers = await repository.getAll();
+
+    return {
+      success: true,
+      data: customers,
+    };
+  } catch {
+    return {
+      success: false,
+      error: "Failed to load customers",
+    };
+  }
+},
 
 
-  async getEnabled(): Promise<Customer[]> {
-    const customers =
-      await this.getAll();
+  async getEnabled(): Promise<ServiceResult<Customer[]>> {
+    const result =
+  await this.getAll();
 
-    return customers.filter(
-      (customer) => customer.enabled
-    );
+if (!result.success) {
+  return result;
+}
+
+return {
+  success: true,
+  data: result.data.filter(
+    (customer) => customer.enabled
+  ),
+};
   },
 
 
   async getById(
-    id: string
-  ): Promise<Customer | undefined> {
+  id: string
+): Promise<ServiceResult<Customer>> {
 
-    return repository.getById(id);
-  },
+  try {
+    const customer =
+      await repository.getById(id);
 
+    if (!customer) {
+      return {
+        success: false,
+        error: "Customer not found",
+      };
+    }
+
+    return {
+      success: true,
+      data: customer,
+    };
+
+  } catch {
+    return {
+      success: false,
+      error: "Failed to get customer",
+    };
+  }
+},
 
   async create(
     data: {
@@ -37,7 +86,9 @@ export function createCustomerService(
       email: string;
       code: string;
     }
-  ): Promise<Customer> {
+  ): Promise<ServiceResult<Customer>> {
+
+      try {
 
     const now = new Date();
 
@@ -64,11 +115,25 @@ export function createCustomerService(
     };
 
 
-    return repository.create(
-      newCustomer
-    );
-  },
+const customer =
+      await repository.create(
+        newCustomer
+      );
+return {
+      success: true,
+      data: customer,
+    };
 
+      } catch {
+
+
+            return {
+      success: false,
+      error: "Failed to create customer",
+    };
+
+  }
+},
 
   async update(
     id: string,
@@ -79,19 +144,22 @@ export function createCustomerService(
       email: string;
       code: string;
     }
-  ): Promise<Customer | undefined> {
+  ): Promise<ServiceResult<Customer>> {
 
-    const customer =
-      await repository.getById(id);
+    const existingCustomer =
+  await repository.getById(id);
 
 
-    if (!customer) {
-      return undefined;
-    }
+if (!existingCustomer) {
+  return {
+    success: false,
+    error: "Customer not found",
+  };
+}
 
 
     const updatedCustomer: Customer = {
-      ...customer,
+  ...existingCustomer,
 
       firstName: data.firstName,
 
@@ -107,9 +175,15 @@ export function createCustomerService(
     };
 
 
-    return repository.update(
-      updatedCustomer
-    );
+    const updated =
+  await repository.update(
+    updatedCustomer
+  );
+
+return {
+  success: true,
+  data: updated,
+};
   },
 
 
@@ -123,15 +197,18 @@ export function createCustomerService(
 
   async archive(
     id: string
-  ): Promise<Customer | undefined> {
+  ): Promise<ServiceResult<Customer>> {
 
     const customer =
       await repository.getById(id);
 
 
     if (!customer) {
-      return undefined;
-    }
+  return {
+    success: false,
+    error: "Customer not found",
+  };
+}
 
 
     const updatedCustomer: Customer = {
@@ -145,23 +222,31 @@ export function createCustomerService(
     };
 
 
-    return repository.update(
-      updatedCustomer
-    );
+    const updated =
+  await repository.update(
+    updatedCustomer
+  );
+
+return {
+  success: true,
+  data: updated,
+};
   },
 
 
   async restore(
     id: string
-  ): Promise<Customer | undefined> {
+  ): Promise<ServiceResult<Customer>> {
 
     const customer =
       await repository.getById(id);
 
 
     if (!customer) {
-      return undefined;
-    }
+return {
+  success: false,
+  error: "Customer not found",
+};    }
 
 
     const updatedCustomer: Customer = {
@@ -173,23 +258,32 @@ export function createCustomerService(
     };
 
 
-    return repository.update(
-      updatedCustomer
-    );
+    const updated =
+  await repository.update(
+    updatedCustomer
+  );
+
+return {
+  success: true,
+  data: updated,
+};
   },
 
 
   async toggleStatus(
     id: string
-  ): Promise<Customer | undefined> {
+  ): Promise<ServiceResult<Customer>> {
 
     const customer =
       await repository.getById(id);
 
 
     if (!customer) {
-      return undefined;
-    }
+  return {
+    success: false,
+    error: "Customer not found",
+  };
+}
 
 
     const updatedCustomer: Customer = {
@@ -201,9 +295,33 @@ export function createCustomerService(
     };
 
 
-    return repository.update(
-      updatedCustomer
-    );
+   const updated =
+  await repository.update(
+    updatedCustomer
+  );
+
+return {
+  success: true,
+  data: updated,
+};
   },
+
+
+async refresh(): Promise<ServiceResult<Customer[]>> {
+  try {
+    const customers = await repository.getAll();
+
+    return {
+      success: true,
+      data: customers,
+    };
+  } catch {
+    return {
+      success: false,
+      error: "Failed to refresh customers",
+    };
+  }
+},
+
   };
 }
