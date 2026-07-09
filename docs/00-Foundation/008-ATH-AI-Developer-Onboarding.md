@@ -87,6 +87,14 @@ AI assistants are NOT allowed to:
 - Ignore existing standards
 
 ---
+### Feature Public API Rule
+
+AI assistants must never import internal files of a feature from outside that feature.
+
+Only the feature public entry point (`index.ts`) is considered a stable import boundary.
+
+If a required symbol is not exported by the feature public API, the assistant must request an architectural decision instead of bypassing the boundary.
+
 
 # 5. Development Workflow
 

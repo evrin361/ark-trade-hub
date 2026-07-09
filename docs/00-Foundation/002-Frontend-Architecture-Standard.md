@@ -428,3 +428,27 @@ This document directly affects:
 - Future Mobile Application
 - Exchange Adapter Integration
 - Trade Console Implementation
+
+## Feature Public API
+
+Every Feature must expose a single public entry point.
+
+Principles:
+
+- Every Feature must expose a single public entry point.
+- External modules must import only from the feature public API.
+- Internal files are private implementation details.
+
+Public API may expose:
+
+- Pages
+- Public hooks
+- Public types
+- Public services (when explicitly approved)
+
+The following must remain private:
+
+- Internal components
+- Repositories
+- Utilities
+- Implementation details
