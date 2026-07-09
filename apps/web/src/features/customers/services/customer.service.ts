@@ -1,26 +1,32 @@
-import { customerSeed } from "../seed/customers";
+import { customerRepository } from "../repositories/customer.repository.instance";
 import type { Customer } from "../types/customer";
 
 export const CustomerService = {
-  getAll(): Customer[] {
-    return [...customerSeed];
+
+  async getAll(): Promise<Customer[]> {
+    return customerRepository.getAll();
   },
 
-  getEnabled(): Customer[] {
-    return this.getAll().filter(
+
+  async getEnabled(): Promise<Customer[]> {
+    const customers =
+      await this.getAll();
+
+    return customers.filter(
       (customer) => customer.enabled
     );
   },
 
-  getById(id: string): Customer | undefined {
-    return this.getAll().find(
-      (customer) => customer.id === id
-    );
+
+  async getById(
+    id: string
+  ): Promise<Customer | undefined> {
+
+    return customerRepository.getById(id);
   },
 
 
-  create(
-    customers: Customer[],
+  async create(
     data: {
       firstName: string;
       lastName: string;
@@ -28,41 +34,40 @@ export const CustomerService = {
       email: string;
       code: string;
     }
-  ): Customer[] {
+  ): Promise<Customer> {
 
     const now = new Date();
 
     const newCustomer: Customer = {
-  id: crypto.randomUUID(),
+      id: crypto.randomUUID(),
 
-  firstName: data.firstName,
+      firstName: data.firstName,
 
-  lastName: data.lastName,
+      lastName: data.lastName,
 
-  mobile: data.mobile,
+      mobile: data.mobile,
 
-  email: data.email,
+      email: data.email,
 
-  code: data.code,
+      code: data.code,
 
-  enabled: true,
+      enabled: true,
 
-  archived: false,
+      archived: false,
 
-  createdAt: now,
+      createdAt: now,
 
-  updatedAt: now,
-};
+      updatedAt: now,
+    };
 
-    return [
-      ...customers,
-      newCustomer,
-    ];
+
+    return customerRepository.create(
+      newCustomer
+    );
   },
 
 
-  update(
-    customers: Customer[],
+  async update(
     id: string,
     data: {
       firstName: string;
@@ -71,85 +76,130 @@ export const CustomerService = {
       email: string;
       code: string;
     }
-  ): Customer[] {
-    return customers.map((customer) =>
-      customer.id === id
-        ? {
-            ...customer,
+  ): Promise<Customer | undefined> {
 
-            firstName: data.firstName,
+    const customer =
+      await customerRepository.getById(id);
 
-            lastName: data.lastName,
 
-            mobile: data.mobile,
+    if (!customer) {
+      return undefined;
+    }
 
-            email: data.email,
 
-            code: data.code,
+    const updatedCustomer: Customer = {
+      ...customer,
 
-            updatedAt: new Date(),
-          }
-        : customer
+      firstName: data.firstName,
+
+      lastName: data.lastName,
+
+      mobile: data.mobile,
+
+      email: data.email,
+
+      code: data.code,
+
+      updatedAt: new Date(),
+    };
+
+
+    return customerRepository.update(
+      updatedCustomer
     );
   },
 
 
-  delete(
-    customers: Customer[],
+  async delete(
     id: string
-  ): Customer[] {
-    return customers.filter(
-      (customer) => customer.id !== id
+  ): Promise<void> {
+
+    return customerRepository.delete(id);
+  },
+
+
+  async archive(
+    id: string
+  ): Promise<Customer | undefined> {
+
+    const customer =
+      await customerRepository.getById(id);
+
+
+    if (!customer) {
+      return undefined;
+    }
+
+
+    const updatedCustomer: Customer = {
+      ...customer,
+
+      archived: true,
+
+      enabled: false,
+
+      updatedAt: new Date(),
+    };
+
+
+    return customerRepository.update(
+      updatedCustomer
     );
   },
 
-archive(
-  customers: Customer[],
-  id: string
-): Customer[] {
-  return customers.map((customer) =>
-    customer.id === id
-      ? {
-          ...customer,
-          archived: true,
-          enabled: false,
-          updatedAt: new Date(),
-        }
-      : customer
-  );
-},
 
-
-
-restore(
-  customers: Customer[],
-  id: string
-): Customer[] {
-  return customers.map((customer) =>
-    customer.id === id
-      ? {
-          ...customer,
-          archived: false,
-          updatedAt: new Date(),
-        }
-      : customer
-  );
-},
-
-  toggleStatus(
-    customers: Customer[],
+  async restore(
     id: string
-  ): Customer[] {
-    return customers.map((customer) =>
-      customer.id === id
-        ? {
-            ...customer,
+  ): Promise<Customer | undefined> {
 
-            enabled: !customer.enabled,
+    const customer =
+      await customerRepository.getById(id);
 
-            updatedAt: new Date(),
-          }
-        : customer
+
+    if (!customer) {
+      return undefined;
+    }
+
+
+    const updatedCustomer: Customer = {
+      ...customer,
+
+      archived: false,
+
+      updatedAt: new Date(),
+    };
+
+
+    return customerRepository.update(
+      updatedCustomer
+    );
+  },
+
+
+  async toggleStatus(
+    id: string
+  ): Promise<Customer | undefined> {
+
+    const customer =
+      await customerRepository.getById(id);
+
+
+    if (!customer) {
+      return undefined;
+    }
+
+
+    const updatedCustomer: Customer = {
+      ...customer,
+
+      enabled: !customer.enabled,
+
+      updatedAt: new Date(),
+    };
+
+
+    return customerRepository.update(
+      updatedCustomer
     );
   },
 };
