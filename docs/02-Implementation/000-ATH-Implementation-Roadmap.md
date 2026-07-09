@@ -117,7 +117,7 @@ In Progress
 
 | ID | Task | Status |
 |---|---|---|
-| ATH-IMP-001 | Customer Repository Integration | In Progress |
+| ATH-IMP-001 | Customer Repository Integration | Completed |
 | ATH-IMP-002 | Customer Hook Repository Migration | Pending |
 | ATH-IMP-003 | Customer Feature Service Refinement | Pending |
 | ATH-IMP-004 | Customer UI Architecture Review | Pending |
@@ -246,23 +246,19 @@ Completed
 
 Current active task:
 
-## ATH-IMP-001
+## ATH-IMP-002
 
-Customer Repository Integration
+Customer Hook Repository Migration
 
 
 Related Documents:
 
-
-ATH-IMP-001-Customer-Repository-Integration.md
-
-ATH-IMP-001-Execution-Report-Template.md
+ATH-IMP-002 Specification Document
 
 
 Current Status:
 
-Implementation Ready
-
+Ready for Specification
 ---
 
 # 9. Completed Tasks
