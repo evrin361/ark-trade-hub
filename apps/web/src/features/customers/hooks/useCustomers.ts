@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { CustomerService } from "../services/customer.service";
+import { customerService } from "../services/customer.service.instance";
 import type { Customer } from "../types/customer";
 
 
@@ -30,7 +30,7 @@ export function useCustomers() {
     async function loadCustomers() {
 
       const data =
-        await CustomerService.getAll();
+        await customerService.getAll();
 
       setCustomers(data);
 
@@ -49,7 +49,7 @@ export function useCustomers() {
   ) {
 
     const customer =
-      await CustomerService.create(data);
+      await customerService.create(data);
 
 
     setCustomers((current) => [
@@ -66,7 +66,7 @@ export function useCustomers() {
   ) {
 
     const updated =
-      await CustomerService.update(
+      await customerService.update(
         id,
         data
       );
@@ -91,7 +91,7 @@ export function useCustomers() {
   ) {
 
     const updated =
-      await CustomerService.archive(id);
+      await customerService.archive(id);
 
 
     if (!updated) return;
@@ -113,7 +113,7 @@ export function useCustomers() {
   ) {
 
     const updated =
-      await CustomerService.restore(id);
+      await customerService.restore(id);
 
 
     if (!updated) return;
@@ -151,7 +151,7 @@ export function useCustomers() {
 
 
     const updated =
-      await CustomerService.toggleStatus(id);
+      await customerService.toggleStatus(id);
 
 
     if (!updated) return;

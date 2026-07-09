@@ -1,10 +1,13 @@
-import { customerRepository } from "../repositories/customer.repository.instance";
 import type { Customer } from "../types/customer";
+import type { CustomerRepository } from "../repositories/customer.repository";
 
-export const CustomerService = {
+export function createCustomerService(
+  repository: CustomerRepository
+) {
+  return {
 
   async getAll(): Promise<Customer[]> {
-    return customerRepository.getAll();
+    return repository.getAll();
   },
 
 
@@ -22,7 +25,7 @@ export const CustomerService = {
     id: string
   ): Promise<Customer | undefined> {
 
-    return customerRepository.getById(id);
+    return repository.getById(id);
   },
 
 
@@ -61,7 +64,7 @@ export const CustomerService = {
     };
 
 
-    return customerRepository.create(
+    return repository.create(
       newCustomer
     );
   },
@@ -79,7 +82,7 @@ export const CustomerService = {
   ): Promise<Customer | undefined> {
 
     const customer =
-      await customerRepository.getById(id);
+      await repository.getById(id);
 
 
     if (!customer) {
@@ -104,7 +107,7 @@ export const CustomerService = {
     };
 
 
-    return customerRepository.update(
+    return repository.update(
       updatedCustomer
     );
   },
@@ -114,7 +117,7 @@ export const CustomerService = {
     id: string
   ): Promise<void> {
 
-    return customerRepository.delete(id);
+    return repository.delete(id);
   },
 
 
@@ -123,7 +126,7 @@ export const CustomerService = {
   ): Promise<Customer | undefined> {
 
     const customer =
-      await customerRepository.getById(id);
+      await repository.getById(id);
 
 
     if (!customer) {
@@ -142,7 +145,7 @@ export const CustomerService = {
     };
 
 
-    return customerRepository.update(
+    return repository.update(
       updatedCustomer
     );
   },
@@ -153,7 +156,7 @@ export const CustomerService = {
   ): Promise<Customer | undefined> {
 
     const customer =
-      await customerRepository.getById(id);
+      await repository.getById(id);
 
 
     if (!customer) {
@@ -170,7 +173,7 @@ export const CustomerService = {
     };
 
 
-    return customerRepository.update(
+    return repository.update(
       updatedCustomer
     );
   },
@@ -181,7 +184,7 @@ export const CustomerService = {
   ): Promise<Customer | undefined> {
 
     const customer =
-      await customerRepository.getById(id);
+      await repository.getById(id);
 
 
     if (!customer) {
@@ -198,8 +201,9 @@ export const CustomerService = {
     };
 
 
-    return customerRepository.update(
+    return repository.update(
       updatedCustomer
     );
   },
-};
+  };
+}
