@@ -120,7 +120,7 @@ In Progress
 | ATH-IMP-001 | Customer Repository Integration | Completed |
 | ATH-IMP-002 | Customer Dependency Injection Preparation | Completed |
 | ATH-IMP-003 | Customer Feature Service Refinement | Completed |
-| ATH-IMP-004 | Customer UI Architecture Review | Pending |
+| ATH-IMP-004 | Customer Feature Public API Boundary | Completed |
 
 ---
 
@@ -248,11 +248,11 @@ Current active task:
 
 ## ATH-IMP-004
 
-Customer UI Architecture Review
+Customer Feature Public API Boundary
 
 Current Status:
 
-Ready for Specification
+Completed
 ---
 
 # 9. Completed Tasks
