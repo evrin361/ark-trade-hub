@@ -194,37 +194,49 @@ Completed:
 
 - Project foundation
 - Documentation standards
-- Frontend architecture standard
+- Frontend architecture
 - Customer domain model
 - Customer service layer
-- Customer hooks
 - Customer repository abstraction
+- Business Domain Architecture (ATH-ARC-310)
 
-Current customer architecture:
+Current Business Architecture:
 
+Organization
+    ↓
+Users
+    ↓
+Customers
+    ↓
+Portfolios
+    ↓
+Exchange Accounts
+    ↓
+Assets
 
-Customer Feature
+Campaigns operate across Portfolios.
 
-Seed Data
-
-↓
-
-Service Layer
-
-↓
-
-Repository Layer
-
-↓
-
-Hook Layer
-
-↓
-
-UI Layer
-
+Trades execute business operations through Exchange Accounts.
 
 ---
+
+# 9.1 Multi-Tenant Direction
+
+ATH is designed as a Multi-Tenant platform.
+
+Each Organization represents an independent Tenant.
+
+Business isolation is enforced at the Organization level.
+
+Customers, Portfolios, Campaigns, Trades and Workspaces belong to exactly one Organization.
+
+Future deployments may use:
+
+- Shared Infrastructure
+- Dedicated Infrastructure
+- Hybrid Deployment
+
+without changing the business architecture.
 
 # 10. Database Direction
 
@@ -235,6 +247,10 @@ ATH database architecture is designed around:
 - Security
 - Auditability
 - Customer ownership model
+
+Database architecture must support tenant isolation and future deployment flexibility.
+
+The business domain remains unchanged regardless of deployment model.
 
 ---
 
@@ -255,6 +271,11 @@ Authorization
 
 Feature Permissions
 
+Authentication identifies Users.
+
+Authorization controls User permissions.
+
+Business ownership is defined by the Business Domain Architecture.
 
 ---
 
@@ -277,6 +298,9 @@ Exchange Adapter
 
 Exchange Providers
 
+Exchange Accounts belong to Portfolios.
+
+Business logic must interact with Portfolios and Campaigns rather than exchange implementations.
 
 ---
 
@@ -371,30 +395,18 @@ Architecture Review
 
 Current focus:
 
-Customer Feature Evolution
+Business Domain Stabilization
 
-Migration direction:
+Completed:
 
-From:
+- Business Domain Architecture
+- Multi-Tenant Foundation
+- Ownership Model
+- Portfolio Architecture
 
+Next phase:
 
-Mock Data
-
-Local Service Logic
-
-
-To:
-
-
-Repository Abstraction
-
-↓
-
-Supabase Repository
-
-↓
-
-Production Database
+Implementation alignment with the Business Domain Architecture.
 
 
 ---
@@ -406,3 +418,15 @@ Production Database
 |0.1.0|2026-07-08|Initial Draft|
 
 ---
+
+## Core Architecture Documents
+
+The architectural foundation of ATH is defined by:
+
+- ATH-ARC-300 — ARK Master Context
+- ATH-ARC-301 — Database Architecture
+- ATH-ARC-302 — Authentication & Authorization
+- ATH-ARC-303 — Infrastructure Integration
+- ATH-ARC-310 — Business Domain Architecture
+- ATH-ARC-311 — Business Ownership & Lifecycle Architecture
+- ATH-ARC-312 — Architecture Index
