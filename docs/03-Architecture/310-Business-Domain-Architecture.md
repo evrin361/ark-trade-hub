@@ -242,6 +242,36 @@ Each Portfolio may contain:
 - Performance History
 
 Portfolio is the primary owner of investment assets.
+
+## Market
+
+A Market represents a financial market category.
+
+Examples:
+
+- Crypto
+- Stock
+- Forex
+- Commodity
+
+A Market contains multiple Exchanges.
+
+## Exchange
+
+An Exchange represents a trading platform operating within a Market.
+
+Examples:
+
+- Nobitex
+- Binance
+- Bybit
+
+An Exchange belongs to exactly one Market.
+
+An Exchange hosts Exchange Accounts.
+
+An Exchange never owns business assets.
+
 ---
 
 # 11. Exchange Account
@@ -365,26 +395,23 @@ No child entity may own its parent.
 The high-level business hierarchy is:
 
 Organization
-
-↓
-
-Users
-
-↓
-
-Customers
-
-↓
-
-Portfolios
-
-↓
-
-Exchange Accounts
-
-↓
-
-Assets
+        │
+        ▼
+Customer
+        │
+        ▼
+Portfolio
+        │
+        ├──────────────► Assets
+        │
+        ▼
+Exchange Account
+        │
+        ▼
+Exchange
+        │
+        ▼
+Market
 
 Campaigns operate across one or more Portfolios.
 

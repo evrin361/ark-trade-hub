@@ -63,6 +63,11 @@ Ownership defines:
 
 Operations never transfer ownership.
 
+Exchange Accounts connect Portfolios to Exchanges.
+
+Neither Exchange Accounts nor Exchanges own business assets.
+
+Business ownership always remains with the Portfolio.
 ---
 
 # 3. Ownership Hierarchy

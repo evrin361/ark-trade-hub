@@ -124,6 +124,14 @@ In Progress
 | ATH-IMP-004 | Customer Feature Public API Boundary | Completed |
 | ATH-IMP-005 | Business Domain Architecture Alignment | Completed |
 | ATH-IMP-006 | Organization Domain Foundation | Completed |
+| ATH-IMP-007 | Portfolio Domain Foundation | Completed |
+| ATH-IMP-008 | Market Domain Foundation | Planned |
+| ATH-IMP-009 |	Exchange Domain Foundation | Planned |
+| ATH-IMP-010 |	Exchange Account Foundation	| Planned |
+| ATH-IMP-011 |	Customer Ownership Alignment | Planned |
+| ATH-IMP-012 |	Campaign Domain Foundation | Planned |
+| ATH-IMP-013 |	Trade Domain Foundation | Planned |
+ 
 
 ### Architectural Foundation
 
