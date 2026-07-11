@@ -40,6 +40,8 @@ const [mobile, setMobile] = useState("");
 const [email, setEmail] = useState("");
 const [code, setCode] = useState("");
 const [editingId, setEditingId] = useState<string | null>(null);
+const DEFAULT_ORGANIZATION_ID =
+  "default-organization";
 
   return (
     <AppPage
@@ -175,12 +177,13 @@ const [editingId, setEditingId] = useState<string | null>(null);
   );
 } else {
   createCustomer({
-    firstName,
-    lastName,
-    mobile,
-    email,
-    code,
-  });
+  organizationId: DEFAULT_ORGANIZATION_ID,
+  firstName,
+  lastName,
+  mobile,
+  email,
+  code,
+});
 }
 
 
@@ -204,194 +207,6 @@ setEditingId(null);
   </Card>
 )}
 
-{/* 
-      <div className="space-y-6">
-
-        {customers.map((customer) => (
-
-          <Card
-            key={customer.id}
-            className="
-              px-8
-              py-8
-            "
-          >
-
-            <div className="flex items-center justify-between">
-
-
-              <div className="space-y-5">
-
-
-                <div>
-
-                  <div className="
-                    mb-1
-                    text-xs
-                    uppercase
-                    tracking-[0.25em]
-                    text-cyan-300/70
-                  ">
-                    مشتری
-                  </div>
-
-
-                  <h2 className="
-                    text-2xl
-                    font-bold
-                    text-white
-                  ">
-                    {customer.firstName} {customer.lastName}
-                  </h2>
-
-                </div>
-
-
-
-                <div className="space-y-2 text-sm opacity-80">
-
-                  <p>
-                    موبایل:
-                    <span className="mr-2">
-                      {customer.mobile}
-                    </span>
-                  </p>
-
-
-                  <p>
-                    ایمیل:
-                    <span className="mr-2">
-                      {customer.email}
-                    </span>
-                  </p>
-
-
-                </div>
-
-
-
-                <StatusBadge active={customer.enabled} />
-                <ArchiveBadge archived={customer.archived} />
-
-
-              </div>
-
-
-
-            </div>
-
-
-
-            <div
-              className="
-                mt-8
-                pt-5
-                border-t
-                border-white/5
-                flex
-                justify-end
-                gap-3
-              "
-            >
-
-             <Button
-  variant="secondary"
-  onClick={() => {
-
-    setEditingId(customer.id);
-
-    setFirstName(customer.firstName);
-    setLastName(customer.lastName);
-    setMobile(customer.mobile);
-    setEmail(customer.email);
-    setCode(customer.code);
-
-    setShowForm(true);
-
-  }}
->
-  <Pencil size={16} />
-  ویرایش
-</Button>
-
-
-
-              <Button
-                variant="secondary"
-                onClick={() => {
-
-if (customer.archived) {
-  alert(
-    "مشتری آرشیو شده است و امکان تغییر وضعیت ندارد. ابتدا بازگردانی کنید."
-  );
-
-  return;
-}
-
-
-const actionText = customer.enabled
-  ? "غیرفعال"
-  : "فعال";
-
-const confirmed = window.confirm(
-  `آیا مطمئن هستید؟\n\nمشتری ${actionText} خواهد شد و اطلاعات حفظ خواهد شد.`
-);
-  if (!confirmed) return;
-
-  toggleCustomerStatus(customer.id);
-}}
-              >
-
-                <Power size={16} />
-
-                تغییر وضعیت
-
-              </Button>
-
-
-{customer.archived ? (
-  <Button
-    variant="secondary"
-    onClick={() => {
-      const confirmed = window.confirm(
-        "آیا مطمئن هستید؟\n\nمشتری از حالت آرشیو خارج خواهد شد."
-      );
-
-      if (!confirmed) return;
-
-      restoreCustomer(customer.id);
-    }}
-  >
-    بازگردانی
-  </Button>
-) : (
-  <Button
-    variant="secondary"
-    onClick={() => {
-      const confirmed = window.confirm(
-        "آیا مطمئن هستید؟\n\nمشتری آرشیو و غیرفعال خواهد شد اطلاعات حفظ  میشود ."
-      );
-
-      if (!confirmed) return;
-
-      archiveCustomer(customer.id);
-    }}
-  >
-    آرشیو
-  </Button>
-)}
-
-
-            </div>
-
-
-          </Card>
-
-        ))}
-
-
-      </div>
- */}
 <CustomersTable
   customers={customers}
 

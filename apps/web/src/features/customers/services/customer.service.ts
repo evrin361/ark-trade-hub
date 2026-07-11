@@ -80,12 +80,13 @@ return {
 
   async create(
     data: {
-      firstName: string;
-      lastName: string;
-      mobile: string;
-      email: string;
-      code: string;
-    }
+  organizationId: string;
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  email: string;
+  code: string;
+}
   ): Promise<ServiceResult<Customer>> {
 
       try {
@@ -94,6 +95,8 @@ return {
 
     const newCustomer: Customer = {
       id: crypto.randomUUID(),
+      
+      organizationId: data.organizationId,
 
       firstName: data.firstName,
 

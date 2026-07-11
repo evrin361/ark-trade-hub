@@ -13,6 +13,12 @@ export interface Customer {
    */
   id: string;
 
+
+  /**
+   * Owner Organization
+   */
+organizationId: string;
+
   /**
    * Personal Information
    */

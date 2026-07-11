@@ -7,6 +7,8 @@ import type { Customer } from "../types/customer";
 
 
 export interface CreateCustomerDto {
+  organizationId: string;
+
   firstName: string;
   lastName: string;
   mobile: string;
@@ -14,6 +16,13 @@ export interface CreateCustomerDto {
   code: string;
 }
 
+export interface UpdateCustomerDto {
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  email: string;
+  code: string;
+}
 
 export function useCustomers() {
 
@@ -49,6 +58,7 @@ setLoading(false);
   async function createCustomer(
     data: CreateCustomerDto
   ) {
+const DEFAULT_ORGANIZATION_ID = "default-organization";
 
 const result =
   await customerService.create(data);
@@ -65,9 +75,9 @@ setCustomers((current) => [
 
 
   async function updateCustomer(
-    id: string,
-    data: CreateCustomerDto
-  ) {
+  id: string,
+  data: UpdateCustomerDto
+) {
 
 const result =
   await customerService.update(
