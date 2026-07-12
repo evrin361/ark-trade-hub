@@ -131,7 +131,8 @@ In Progress
 | ATH-IMP-011 | Customer Ownership Alignment | Completed
 | ATH-IMP-012 | Campaign Domain Foundation | Completed
 | ATH-IMP-013 | Trade Domain Foundation | Completed
- 
+| ATH-DOC-001 | Foundation Documentation Synchronization | Completed |
+| ATH-IMP-014 | Data Persistence Foundation | Planned |
 
 ### Architectural Foundation
 
