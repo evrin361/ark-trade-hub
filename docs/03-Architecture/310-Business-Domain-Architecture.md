@@ -538,7 +538,7 @@ Business responsibilities must never overlap.
 | Customer | Owns investment portfolios |
 | Portfolio | Owns investment assets |
 | Exchange Account | Connects portfolios to financial markets |
-| Campaign | Coordinates investment strategies |
+| Campaign | Coordinates trading activity |
 | Trade | Records execution events |
 
 This separation is mandatory and must be preserved throughout future development.

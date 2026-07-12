@@ -203,3 +203,4 @@ New documents should integrate into the existing hierarchy rather than creating 
 - ATH-ARC-303 — Infrastructure Integration Plan
 - ATH-ARC-310 — Business Domain Architecture
 - ATH-ARC-311 — Business Ownership & Lifecycle Architecture
+- ATH-ARC-312 — Architecture Index
