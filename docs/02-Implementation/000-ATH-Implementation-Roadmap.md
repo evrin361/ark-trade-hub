@@ -132,7 +132,10 @@ In Progress
 | ATH-IMP-012 | Campaign Domain Foundation | Completed
 | ATH-IMP-013 | Trade Domain Foundation | Completed
 | ATH-DOC-001 | Foundation Documentation Synchronization | Completed |
-| ATH-IMP-014 | Data Persistence Foundation | Planned |
+| ATH-IMP-014 | Data Persistence Foundation | Completed |
+| ATH-IMP-015 | Repository Foundation | Completed |
+| ATH-DOC-003 | Infrastructure & Application Architecture Synchronization | Completed |
+
 
 ### Architectural Foundation
 
@@ -308,9 +311,7 @@ Completed
 
 Current active task:
 
-ATH-IMP-007
-
-Portfolio Domain Foundation
+ATH-IMP-016
 
 Current Status:
 

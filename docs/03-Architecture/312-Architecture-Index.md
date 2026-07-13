@@ -50,14 +50,14 @@ The recommended reading sequence is:
 4. ATH-ARC-302 — Authentication & Authorization Architecture
 5. ATH-ARC-301 — Database Architecture
 6. ATH-ARC-303 — Infrastructure Integration Plan
+7. ATH-ARC-320 — Data Persistence Architecture
+8. ATH-ARC-330 — Infrastructure Architecture
+9. ATH-ARC-340 — Application Architecture
 
 ---
 
 # 4. Architecture Map
 
-```
-
-```text
                     ATH-ARC-300
                   ARK Master Context
                           │
@@ -82,9 +82,7 @@ The recommended reading sequence is:
                           │
                           ▼
               Implementation Tasks
-```
 
-````markdown
 ---
 
 # 5. Architecture Responsibilities
@@ -205,3 +203,5 @@ New documents should integrate into the existing hierarchy rather than creating 
 - ATH-ARC-311 — Business Ownership & Lifecycle Architecture
 - ATH-ARC-312 — Architecture Index
 - ATH-ARC-320 — Data Persistence Architecture
+- ATH-ARC-330 — Infrastructure Architecture
+- ATH-ARC-340 — Application Architecture
