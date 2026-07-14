@@ -4,6 +4,8 @@ export const customerSeed: Customer[] = [
   {
     id: "customer-ebrahim",
 
+    organizationId: "organization-default",
+    
     firstName: "ابراهیم",
 
     lastName: "غفاری",

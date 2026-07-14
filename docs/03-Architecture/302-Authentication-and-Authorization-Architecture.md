@@ -4,7 +4,11 @@
 
 This document defines the authentication and authorization architecture of ARK Trade Hub.
 
-The purpose is to separate:
+Authentication is independent from the business domain.
+
+The business domain is defined by ATH-ARC-310 (Business Domain Architecture).
+
+The purpose of this document is to define how authenticated users interact with business entities while preserving ownership boundaries.
 
 - System Users
 - Business Customers
@@ -20,8 +24,21 @@ ARK follows the principle:
 
 # 2. Core Concepts
 
+## 2.1 Organization
 
-## 2.1 Users
+An Organization represents an independent business operating on the platform.
+
+Each authenticated User belongs to exactly one Organization.
+
+Authentication never crosses Organization boundaries.
+
+Organizations are isolated from one another.
+
+Business ownership is enforced at the Organization level.
+
+---
+
+## 2.2 Users
 
 Users represent people who can authenticate into the system.
 
@@ -31,50 +48,79 @@ Examples:
 - Employees
 - Customer representatives
 
-
 Users are responsible for:
 
 - Login
 - Authentication
 - Personal identity
 
+Users operate on behalf of their Organization.
+
+Users do not own business assets.
+
+Business ownership is defined separately by the Business Domain Architecture.
 
 ---
 
-## 2.2 Customers
+## 2.3 Customers
 
-Customers represent business entities.
+Customers are business entities.
 
-Examples:
+Customers own investment Portfolios.
 
-- Trading companies
-- Suppliers
-- Buyers
-- Organizations
+Customers are not authentication identities.
 
+Customers may later receive access to the Customer Portal through one or more Customer Accounts.
 
-A customer is not a user.
+A Customer belongs to exactly one Organization.
 
+The same real-world individual or company may exist as independent Customers in multiple Organizations without sharing business data.
 
-Example:
+---
 
-Customer:
-ABC Trading Company
+## 2.4 Customer Portal Accounts
 
+Customer Accounts represent authentication identities for Customers.
 
+A Customer may have one or more Customer Portal Accounts.
 
-Users:
+These accounts are used only for accessing the Customer Portal.
 
+Customer Portal Accounts do not own business data.
 
-Ali - CEO
-Sara - Purchase Manager
-Reza - Accountant
+They inherit access to the Customer's business entities through authorization rules.
 
+---
 
+## 2.5 Roles & Permissions
 
-One customer can have multiple users.
+System permissions determine what authenticated Users and Customer Portal Accounts are allowed to do.
 
+Permissions never define business ownership.
 
+Ownership is defined exclusively by the Business Domain Architecture.
+
+---
+
+## 2.6 Business Domain
+
+The business domain consists of:
+
+Organization
+    ↓
+Customer
+    ↓
+Portfolio
+    ↓
+Exchange Account
+    ↓
+Asset
+
+Campaigns operate on Portfolios.
+
+Trades are executed through Exchange Accounts.
+
+Authentication and authorization interact with this domain but never redefine its ownership structure.
 ---
 
 # 3. Authentication Model
@@ -110,69 +156,35 @@ Customer Entity
 
 # 4. Database Separation
 
+Organization
 
-## Customers Table
+↓
 
-Responsible for business information.
+Users
 
+↓
 
-Example:
+Customer Accounts
 
+↓
 
-customers
+Customers
 
-id
-name
-mobile
-email
-status
-archived
-created_at
-updated_at
+↓
 
+Portfolios
 
+↓
 
----
+Exchange Accounts
 
-## Users Table
+↓
 
-Responsible for identities.
+Campaigns
 
+↓
 
-Example:
-
-
-users
-
-id
-email
-name
-created_at
-
-
-
----
-
-## Customer Accounts Table
-
-
-Connects users with customers.
-
-
-Example:
-
-
-
-customer_accounts
-
-id
-customer_id
-user_id
-role
-created_at
-
-
-
+Trades
 ---
 
 # 5. Authorization
@@ -200,7 +212,11 @@ CUSTOMER_OWNER
 CUSTOMER_MANAGER
 CUSTOMER_VIEWER
 
+Permissions determine what a User may do.
 
+Ownership determines what business data exists.
+
+Permissions never redefine ownership.
 
 ---
 
@@ -250,6 +266,11 @@ Viewer Account
 
 Each account receives controlled permissions.
 
+Customer Portal users authenticate independently.
+
+Their permissions are limited to their own Customer entity and related Portfolios.
+
+Operational Users continue managing business operations on behalf of their Organization.
 
 ---
 
@@ -272,8 +293,11 @@ ARK follows:
 
 This architecture supports:
 
-- Multi-user customers
-- Multiple organizations
-- Permission management
-- Customer self-service portal
-- API access
+- Multi-Tenant Organizations
+- Multiple Users per Organization
+- Customer Portal
+- Multiple Customer Accounts
+- Role-Based Access Control
+- Independent Business Ownership
+- Dedicated Organization Deployments
+- Hybrid Infrastructure
