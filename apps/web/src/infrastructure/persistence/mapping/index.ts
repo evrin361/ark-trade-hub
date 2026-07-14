@@ -1,7 +1,18 @@
 export type {
   Mapper,
-} from "./mapper";
+  EntityMapper,
+  CollectionMapper,
+} from "./contracts";
 
 export type {
-  EntityMapper,
-} from "./entity-mapper";
+  BaseMapper,
+  BaseEntityMapper,
+} from "./base";
+
+export type {
+  MappingContext,
+} from "./context";
+
+export type {
+  MappingOptions,
+} from "./common";
