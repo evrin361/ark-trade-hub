@@ -1,0 +1,1 @@
+export type { AdapterOptions } from "./adapter-options";
