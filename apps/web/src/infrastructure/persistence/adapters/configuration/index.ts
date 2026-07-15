@@ -1,0 +1,1 @@
+export type { AdapterConfiguration } from "./adapter-configuration";
