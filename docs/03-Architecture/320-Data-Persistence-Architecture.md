@@ -175,21 +175,37 @@ Its responsibility is limited to maintaining durable representations of Domain s
 
 ## 4.1 Layer Structure
 
-The persistence architecture is organized into four logical layers.
+The persistence architecture is organized into the following architectural layers.
 
 Business Domain
 
 ↓
 
-Domain Contracts
+Persistence Contracts
 
 ↓
 
-Persistence Implementation
+Repository Foundation
 
 ↓
 
-Infrastructure
+Repository Implementation Foundation
+
+↓
+
+Persistence Mapping Foundation
+
+↓
+
+Persistence Runtime Foundation
+
+↓
+
+Technology Adapter
+
+↓
+
+Database
 
 Each layer has a single responsibility and communicates only through well-defined contracts.
 
@@ -217,9 +233,9 @@ The Domain represents business truth only.
 
 ---
 
-## 4.3 Domain Contracts
+## 4.3 Persistence Contracts
 
-Domain Contracts define the persistence capabilities required by the Business Domain.
+Persistence Contracts define the persistence capabilities required by the Business Domain.
 
 Examples include:
 
@@ -234,41 +250,26 @@ They do not define implementation.
 
 ---
 
-## 4.4 Persistence Implementation
+## 4.4 Repository Foundation
 
-Persistence Implementations fulfill the contracts defined by the Domain.
+Repository Foundation provides reusable persistence abstractions that implement the Persistence Contracts.
 
-Possible implementations include:
+It establishes common repository behavior while remaining completely independent from persistence technologies.
 
-- Supabase
-- PostgreSQL
-- In-Memory Storage
-- Test Repositories
-- Future storage providers
+Repository Foundation defines reusable architectural behavior.
 
-The Business Domain must not depend on any specific implementation.
-
-Replacing one implementation with another must not affect the Domain.
+It does not contain provider-specific implementation.
 
 ---
 
-## 4.5 Infrastructure
+## 4.5 Repository Implementation Foundation
 
-Infrastructure provides the technical capabilities required by persistence implementations.
+Repository Implementation Foundation provides reusable implementation building blocks shared by future persistence providers.
 
-Examples include:
+It extends the Repository Foundation while remaining technology independent.
 
-- Database connections
-- Authentication providers
-- Storage services
-- Configuration
-- Connection management
-- Logging
-- Monitoring
+Concrete persistence technologies are introduced through Technology Adapters.
 
-Infrastructure supports persistence.
-
-Infrastructure never defines business behavior.
 # 5. Entity Persistence Strategy
 
 Persistence is responsible for preserving business state.
