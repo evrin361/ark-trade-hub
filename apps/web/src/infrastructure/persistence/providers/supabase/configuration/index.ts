@@ -1,0 +1,1 @@
+export type { SupabaseConfiguration } from "./supabase-configuration";
