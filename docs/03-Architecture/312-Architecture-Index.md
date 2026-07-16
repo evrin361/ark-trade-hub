@@ -53,6 +53,7 @@ The recommended reading sequence is:
 7. ATH-ARC-320 — Data Persistence Architecture
 8. ATH-ARC-330 — Infrastructure Architecture
 9. ATH-ARC-340 — Application Architecture
+10. ATH-ARC-350 — Repository Resolution Architecture
 
 ---
 
@@ -75,7 +76,23 @@ The recommended reading sequence is:
                           │
                           ▼
                  ATH-ARC-303
-          Infrastructure Integration
+           Infrastructure Integration
+                          │
+                          ▼
+                 ATH-ARC-320
+          Data Persistence Architecture
+                          │
+                          ▼
+                 ATH-ARC-330
+          Infrastructure Architecture
+                          │
+                          ▼
+                 ATH-ARC-340
+           Application Architecture
+                          │
+                          ▼
+                 ATH-ARC-350
+      Repository Resolution Architecture
                           │
                           ▼
               Implementation Roadmap
@@ -122,6 +139,14 @@ Defines persistence architecture and database design principles.
 Defines infrastructure integration strategies and external platform interactions.
 
 ---
+
+## ATH-ARC-350 — Repository Resolution Architecture
+
+Defines how business repositories are resolved through the persistence architecture.
+
+Establishes the repository resolution pipeline between business contracts, repository implementations, runtime infrastructure, technology adapters, and concrete persistence providers.
+
+Acts as the architectural bridge between application architecture and implementation.
 
 # 6. Architectural Dependency Rules
 
@@ -205,3 +230,4 @@ New documents should integrate into the existing hierarchy rather than creating 
 - ATH-ARC-320 — Data Persistence Architecture
 - ATH-ARC-330 — Infrastructure Architecture
 - ATH-ARC-340 — Application Architecture
+- ATH-ARC-350 — Repository Resolution Architecture
