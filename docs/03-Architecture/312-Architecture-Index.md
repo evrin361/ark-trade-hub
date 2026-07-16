@@ -54,6 +54,7 @@ The recommended reading sequence is:
 8. ATH-ARC-330 — Infrastructure Architecture
 9. ATH-ARC-340 — Application Architecture
 10. ATH-ARC-350 — Repository Resolution Architecture
+11. ATH-ARC-360 — Runtime Resolution Architecture
 
 ---
 
@@ -95,11 +96,14 @@ The recommended reading sequence is:
       Repository Resolution Architecture
                           │
                           ▼
+                 ATH-ARC-360
+        Runtime Resolution Architecture
+                          │
+                          ▼
               Implementation Roadmap
                           │
                           ▼
               Implementation Tasks
-
 ---
 
 # 5. Architecture Responsibilities
@@ -147,6 +151,14 @@ Defines how business repositories are resolved through the persistence architect
 Establishes the repository resolution pipeline between business contracts, repository implementations, runtime infrastructure, technology adapters, and concrete persistence providers.
 
 Acts as the architectural bridge between application architecture and implementation.
+
+## ATH-ARC-360 — Runtime Resolution Architecture
+
+Defines the runtime responsibilities required to consume Repository Resolution Architecture.
+
+Establishes the architectural coordination between runtime services, repository activation, provider interaction, and repository lifecycle management.
+
+Completes the persistence execution chain while preserving provider independence and architectural separation.
 
 # 6. Architectural Dependency Rules
 
@@ -231,3 +243,4 @@ New documents should integrate into the existing hierarchy rather than creating 
 - ATH-ARC-330 — Infrastructure Architecture
 - ATH-ARC-340 — Application Architecture
 - ATH-ARC-350 — Repository Resolution Architecture
+- ATH-ARC-360 — Runtime Resolution Architecture
