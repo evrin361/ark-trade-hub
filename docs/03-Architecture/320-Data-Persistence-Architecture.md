@@ -159,6 +159,7 @@ Architectural decisions should optimize long-term maintainability rather than sh
 Short-term technical optimizations must never compromise Domain integrity.
 
 The architecture should remain understandable, extensible, and replaceable throughout the lifetime of the project.
+
 # 4. Persistence Architecture
 
 The persistence layer exists to preserve the state of the Business Domain.
@@ -201,11 +202,25 @@ Persistence Runtime Foundation
 
 ↓
 
+Repository Resolution Architecture
+
+↓
+
+Runtime Resolution Architecture
+
+↓
+
 Technology Adapter
 
 ↓
 
 Database
+
+Repository Resolution Architecture defines how repositories are identified and resolved independently of concrete providers.
+
+Runtime Resolution Architecture defines how the persistence runtime consumes those repository resolution capabilities while coordinating repository activation and provider interaction.
+
+Together, these architectural layers complete the persistence execution chain without introducing provider-specific behavior into higher architectural layers.
 
 Each layer has a single responsibility and communicates only through well-defined contracts.
 

@@ -142,6 +142,8 @@ In Progress
 | ATH-IMP-019 | Technology Adapter Foundation | Completed |
 | ATH-IMP-020 | Supabase Provider Foundation | Completed |
 | ATH-DOC-005 | Repository Resolution Architecture Synchronization | Completed |
+| ATH-ARC-360 | Runtime Resolution Architecture | Completed |
+| ATH-DOC-006 | Runtime Resolution Architecture Synchronization | Completed |
 | ATH-IMP-021 | Customer Repository Foundation | Ready for Implementation |
 
 
