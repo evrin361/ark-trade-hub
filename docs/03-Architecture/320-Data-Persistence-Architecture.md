@@ -659,3 +659,19 @@ Persistence implementations will evolve.
 The Business Domain remains the permanent foundation of the system.
 
 All future architectural decisions should be evaluated against this principle before implementation.
+
+---
+
+# Related Architecture
+
+This architecture is complemented by the following architectural documents:
+
+- ATH-ARC-330 — Infrastructure Architecture
+- ATH-ARC-340 — Application Architecture
+- ATH-ARC-350 — Repository Resolution Architecture
+- ATH-ARC-360 — Runtime Resolution Architecture
+- ATH-ARC-370 — Repository Foundation Integration Architecture
+
+ATH-ARC-370 formally defines the architectural relationship between Repository Contracts, Repository Foundation, Repository Implementation Foundation, Mapping Foundation, Runtime Foundation, and future provider implementations.
+
+ATH-ARC-320 remains the authoritative document for Persistence Architecture.

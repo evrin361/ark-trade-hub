@@ -775,3 +775,16 @@ Together with the previous architectural documents, it establishes a cohesive, p
 From this point forward, persistence implementations are expected to conform to the architecture, not redefine it.
 
 The architecture is considered complete when future implementations require no architectural reinterpretation to introduce new persistence capabilities.
+
+---
+
+# Related Architecture
+
+This architecture is complemented by the following architectural documents:
+
+- ATH-ARC-360 — Runtime Resolution Architecture
+- ATH-ARC-370 — Repository Foundation Integration Architecture
+
+ATH-ARC-370 formally defines how the Repository Foundation integrates with the Repository Resolution Architecture while preserving the separation between Repository Contracts, Foundation components, Runtime coordination, and provider-specific implementations.
+
+ATH-ARC-350 remains the authoritative document for Repository Resolution Architecture.

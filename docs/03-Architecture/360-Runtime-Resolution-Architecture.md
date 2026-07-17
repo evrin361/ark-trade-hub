@@ -554,3 +554,16 @@ Architecture remains intentional.
 Implementation remains disciplined.
 
 The architecture evolves by design, never by accident.
+
+---
+
+# Related Architecture
+
+This architecture is complemented by the following architectural documents:
+
+- ATH-ARC-350 — Repository Resolution Architecture
+- ATH-ARC-370 — Repository Foundation Integration Architecture
+
+ATH-ARC-370 formally defines how the Repository Foundation integrates with the Runtime Resolution Architecture without changing the runtime responsibilities established by ATH-ARC-360.
+
+ATH-ARC-360 remains the authoritative document for Runtime Resolution Architecture.
