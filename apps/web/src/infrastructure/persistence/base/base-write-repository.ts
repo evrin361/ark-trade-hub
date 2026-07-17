@@ -8,8 +8,13 @@
  */
 
 import type {
+  Identifiable,
+} from "@/contracts/persistence";
+
+import type {
   BaseRepository,
 } from "./base-repository";
 
-export interface BaseWriteRepository
-  extends BaseRepository {}
+export interface BaseWriteRepository<
+  TEntity extends Identifiable,
+> extends BaseRepository<TEntity> {}
