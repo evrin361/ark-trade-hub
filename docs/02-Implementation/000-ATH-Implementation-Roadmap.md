@@ -145,6 +145,8 @@ In Progress
 | ATH-ARC-360 | Runtime Resolution Architecture | Completed |
 | ATH-DOC-006 | Runtime Resolution Architecture Synchronization | Completed |
 | ATH-IMP-021 | Customer Repository Foundation | Ready for Implementation |
+| ATH-ARC-370 — Repository Foundation Integration Architecture | 84d1284 | Completed |
+| ATH-DOC-007 — Repository Foundation Synchronization | Pending | In Progress |
 
 
 
@@ -322,7 +324,7 @@ Completed
 
 Current active task:
 
-ATH-IMP-021 — Customer Repository Foundation
+ATH-IMP-022 — Repository Foundation Integration Validation
 
 Current Status:
 
