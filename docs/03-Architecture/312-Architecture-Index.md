@@ -56,6 +56,7 @@ The recommended reading sequence is:
 10. ATH-ARC-350 — Repository Resolution Architecture
 11. ATH-ARC-360 — Runtime Resolution Architecture
 12. ATH-ARC-370 — Repository Foundation Integration Architecture
+13. ATH-ARC-380 — Persistence Execution Architecture
 
 ---
 
@@ -101,16 +102,20 @@ The recommended reading sequence is:
         Runtime Resolution Architecture
                           │
                           ▼
-                          │
-                          ▼
                      ATH-ARC-370
        Repository Foundation Integration
+                          │
+                          ▼
+                     ATH-ARC-380
+       Persistence Execution Architecture
                           │
                           ▼
               Implementation Roadmap
                           │
                           ▼
               Implementation Tasks
+
+ This map illustrates the architectural evolution of the persistence architecture rather than the runtime dependency chain.
 ---
 
 # 5. Architecture Responsibilities
@@ -155,7 +160,7 @@ Defines infrastructure integration strategies and external platform interactions
 
 Defines how business repositories are resolved through the persistence architecture.
 
-Establishes the repository resolution pipeline between business contracts, repository implementations, runtime infrastructure, technology adapters, and concrete persistence providers.
+Establishes the architectural repository resolution process between business contracts, repository implementations, runtime infrastructure, technology adapters, and concrete persistence providers.
 
 Acts as the architectural bridge between application architecture and implementation.
 
@@ -165,7 +170,7 @@ Defines the runtime responsibilities required to consume Repository Resolution A
 
 Establishes the architectural coordination between runtime services, repository activation, provider interaction, and repository lifecycle management.
 
-Completes the persistence execution chain while preserving provider independence and architectural separation.
+Coordinates runtime participation in the persistence architecture while preserving provider independence.
 
 ## ATH-ARC-370 — Repository Foundation Integration Architecture
 
@@ -174,6 +179,14 @@ Defines the architectural integration between Repository Foundation and Reposito
 Establishes the official architectural boundary separating reusable repository infrastructure from business-specific repository implementations.
 
 Provides the architectural decision governing Repository Foundation evolution while preserving dependency direction and architectural independence.
+
+## ATH-ARC-380 — Persistence Execution Architecture
+
+Defines the architectural execution boundary responsible for performing persistence operations.
+
+Separates repository resolution from persistence execution while preserving provider independence and dependency direction.
+
+Complements the persistence architecture by establishing the execution responsibility beneath Repository Implementations without modifying existing architectural responsibilities.
 
 # 6. Architectural Dependency Rules
 
@@ -260,3 +273,4 @@ New documents should integrate into the existing hierarchy rather than creating 
 - ATH-ARC-350 — Repository Resolution Architecture
 - ATH-ARC-360 — Runtime Resolution Architecture
 - ATH-ARC-370 — Repository Foundation Integration Architecture
+- ATH-ARC-380 — Persistence Execution Architecture

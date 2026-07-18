@@ -15,21 +15,25 @@ It defines only the architectural responsibilities and interaction model.
 After completing ATH-ARC-320, ATH-ARC-330 and ATH-ARC-340, the persistence architecture reached the following structure:
 
 Business Domain
-        ↓
+↓
 Persistence Contracts
-        ↓
+↓
 Repository Foundation
-        ↓
+↓
 Repository Implementation Foundation
-        ↓
+↓
+Repository Resolution Architecture
+↓
 Persistence Mapping Foundation
-        ↓
+↓
 Persistence Runtime Foundation
-        ↓
+↓
+Persistence Execution Foundation
+↓
 Technology Adapter Foundation
-        ↓
-Technology Provider
-        ↓
+↓
+Concrete Provider
+↓
 Database
 
 This architecture successfully separates business concerns from infrastructure concerns.
@@ -162,38 +166,43 @@ No participant may gain awareness of another layer merely because a resolution m
 
 The resolution mechanism exists to hide relationships, not to expose them.
 
-3. Repository Resolution Model
 3.1 Architectural Position
 
-The Repository Resolution Architecture is positioned between the Repository Implementation Foundation and the Persistence Runtime Foundation.
+The Repository Resolution Architecture operates between the Repository Implementation Foundation and the Persistence Runtime Foundation.
 
-Its purpose is to provide the single architectural interaction point through which Repository implementations obtain persistence capabilities.
+Its purpose is to provide the single architectural interaction point through which Repository Implementations obtain persistence capabilities.
 
-The resulting architecture becomes:
+The canonical persistence dependency chain remains:
 
 Business Domain
-        ↓
+↓
 Persistence Contracts
-        ↓
+↓
 Repository Foundation
-        ↓
+↓
 Repository Implementation Foundation
-        ↓
+↓
 Repository Resolution Architecture
-        ↓
+↓
 Persistence Mapping Foundation
-        ↓
+↓
 Persistence Runtime Foundation
-        ↓
+↓
+Persistence Execution Foundation
+↓
 Technology Adapter Foundation
-        ↓
-Technology Provider
-        ↓
+↓
+Concrete Provider
+↓
 Database
 
-The Resolution layer does not replace any existing architectural component.
+Repository Resolution is a capability architecture.
 
-Instead, it completes the interaction chain by introducing the missing coordination point between Repository implementations and the Persistence Runtime.
+It defines the architectural coordination required between Repository Implementations and the Persistence Runtime without introducing an additional dependency layer.
+
+It does not replace any existing architectural component.
+
+Instead, it defines the architectural interaction through which Repository Implementations request persistence capabilities while preserving the canonical dependency hierarchy.
 
 3.2 Architectural Responsibility
 
@@ -210,14 +219,14 @@ It simply connects already existing architectural participants according to the 
 The dependency direction remains strictly one-way.
 
 Repository
-        ↓
-Resolution
-        ↓
-Runtime
-        ↓
+↓
+Repository Resolution
+↓
+Persistence Runtime
+↓
 Technology Adapter
-        ↓
-Provider
+↓
+Concrete Provider
 
 No dependency may ever point upward.
 
@@ -287,6 +296,20 @@ It introduces a new architectural boundary.
 Its existence ensures that Repository implementations consume persistence capabilities through a stable architectural contract rather than by depending directly on runtime services or technology providers.
 
 By centralizing this responsibility, the architecture gains a single, controlled extension point for all future persistence technologies while preserving the independence of every existing layer.
+
+### Relationship with ATH-ARC-380
+
+Repository Resolution and Persistence Execution own different architectural responsibilities.
+
+Repository Resolution is responsible for selecting the architectural execution path.
+
+Persistence Execution is responsible for performing persistence operations after resolution has completed.
+
+Resolution never performs CRUD behavior.
+
+Execution never performs repository resolution.
+
+This separation preserves the single responsibility of both architectural layers while allowing them to cooperate through stable architectural contracts.
 
 3.7 Architectural Principle
 
@@ -402,7 +425,7 @@ Resolution Strategy
 Resolution Result
         │
         ▼
-Persistence Runtime
+Persistence Runtime Foundation
 
 Each component communicates only with its immediate neighbor.
 
@@ -440,29 +463,23 @@ Execution begins only after architectural resolution has successfully completed.
 Every repository interaction follows the same architectural sequence.
 
 Repository
-        │
-        ▼
+↓
 Repository Resolution
-        │
-        ▼
+↓
 Resolution Context
-        │
-        ▼
+↓
 Resolution Strategy
-        │
-        ▼
+↓
 Persistence Runtime
-        │
-        ▼
+↓
+Persistence Execution
+↓
 Technology Adapter
-        │
-        ▼
-Technology Provider
-        │
-        ▼
+↓
+Concrete Provider
+↓
 Persistence Capability Returned
-        │
-        ▼
+↓
 Repository Operation Begins
 
 Architectural resolution always completes before any persistence operation starts.
@@ -635,18 +652,26 @@ No future implementation may introduce reverse dependencies.
 
 The following direction is immutable:
 
-Business
-        ↓
-Repository
-        ↓
-Resolution
-        ↓
-Runtime
-        ↓
-Technology Adapter
-        ↓
-Provider
-        ↓
+Business Domain
+↓
+Persistence Contracts
+↓
+Repository Foundation
+↓
+Repository Implementation Foundation
+↓
+Repository Resolution Architecture
+↓
+Persistence Mapping Foundation
+↓
+Persistence Runtime Foundation
+↓
+Persistence Execution Foundation
+↓
+Technology Adapter Foundation
+↓
+Concrete Provider
+↓
 Database
 
 Architectural evolution may add new layers.
@@ -691,23 +716,25 @@ Every collaboration between architectural layers is now governed by explicit con
 The persistence subsystem now consists of the following architectural layers:
 
 Business Domain
-        ↓
+↓
 Persistence Contracts
-        ↓
+↓
 Repository Foundation
-        ↓
+↓
 Repository Implementation Foundation
-        ↓
+↓
 Repository Resolution Architecture
-        ↓
+↓
 Persistence Mapping Foundation
-        ↓
+↓
 Persistence Runtime Foundation
-        ↓
+↓
+Persistence Execution Foundation
+↓
 Technology Adapter Foundation
-        ↓
-Technology Provider
-        ↓
+↓
+Concrete Provider
+↓
 Database
 
 Each layer owns exactly one architectural responsibility.
@@ -784,7 +811,16 @@ This architecture is complemented by the following architectural documents:
 
 - ATH-ARC-360 — Runtime Resolution Architecture
 - ATH-ARC-370 — Repository Foundation Integration Architecture
+- ATH-ARC-380 — Persistence Execution Architecture
 
 ATH-ARC-370 formally defines how the Repository Foundation integrates with the Repository Resolution Architecture while preserving the separation between Repository Contracts, Foundation components, Runtime coordination, and provider-specific implementations.
+
+ATH-ARC-380 formally defines the architectural execution boundary.
+
+Repository Resolution selects the execution path.
+
+Persistence Execution performs persistence operations.
+
+The two architectures complement each other while preserving complete separation of responsibilities.
 
 ATH-ARC-350 remains the authoritative document for Repository Resolution Architecture.

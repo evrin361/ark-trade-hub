@@ -44,6 +44,8 @@ Persistence Contracts
         ▼
 Infrastructure
 
+This diagram illustrates the high-level application interaction only. The complete persistence architecture is defined in ATH-ARC-320 together with ATH-ARC-350, ATH-ARC-360, ATH-ARC-370, and ATH-ARC-380.
+
 Application serves as the coordination boundary of the system.
 
 1.4 Responsibility Statement
@@ -230,7 +232,7 @@ Presentation remains entirely outside the Application Layer.
 
 3.7 Persistence Boundary
 
-Application may request persistence operations.
+Application may request persistence capabilities through architectural contracts. Repository Resolution, Runtime Resolution, and Persistence Execution coordinate how those persistence operations are ultimately performed.
 
 Application never determines how persistence is performed.
 
@@ -362,7 +364,7 @@ Application never bypasses Business decisions.
 
 5.4 Collaboration with Persistence
 
-Application requests persistence operations through architectural contracts.
+Application requests persistence capabilities through architectural contracts. Repository Resolution, Runtime Resolution, Repository Foundation, and Persistence Execution collaborate beneath those contracts while remaining invisible to the Application Layer.
 
 It never communicates with repository implementations directly.
 
@@ -412,6 +414,8 @@ Persistence Contracts
         │
         ▼
 Infrastructure
+
+Detailed persistence layering is defined by the Persistence Architecture documents.
 
 No reverse dependency is permitted.
 
@@ -583,7 +587,7 @@ Business knowledge belongs to the Business Domain.
 
 Technical execution belongs to Infrastructure.
 
-Persistence belongs to the Persistence Layer.
+Persistence belongs to the Persistence Architecture, including Repository Resolution, Runtime Resolution, Repository Foundation Integration, Persistence Execution, Technology Adapters, and Providers.
 
 Application exists only to connect these architectural responsibilities without absorbing them.
 
