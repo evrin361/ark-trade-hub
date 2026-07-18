@@ -10,6 +10,7 @@ Repository Foundation
 Repository Implementation Foundation
 Persistence Mapping Foundation
 Persistence Runtime Foundation
+Persistence Execution Foundation
 Technology Adapter Foundation
 Repository Resolution Architecture
 
@@ -27,7 +28,7 @@ This architectural gap intentionally prevented implementation from continuing, p
 
 ATH-ARC-360 establishes the Runtime Resolution Architecture.
 
-Its purpose is to define the runtime responsibilities required to consume the Repository Resolution Architecture without introducing provider-specific behavior or implementation details.
+Its purpose is to define the Runtime responsibilities required to coordinate Repository Resolution and Persistence Execution. without introducing provider-specific behavior or implementation details.
 
 This architecture specifies how runtime services participate in repository resolution while preserving the complete separation between architectural layers.
 
@@ -35,7 +36,7 @@ It introduces the architectural contracts through which runtime components coord
 
 1.3 Architectural Goal
 
-The primary goal of this architecture is to complete the persistence execution chain by defining the runtime responsibilities that bridge Repository Resolution and Technology Adapter Foundations.
+The primary goal of this architecture is to complete the persistence execution chain by defining the runtime responsibilities that bridge Repository Resolution and Persistence Execution Foundation.
 
 After completion of ATH-ARC-360, the persistence architecture will provide a complete architectural pathway from the Business Domain to concrete persistence providers without requiring architectural assumptions during implementation.
 
@@ -184,6 +185,20 @@ Persistence Providers determine how persistence operations are executed.
 
 Each architectural layer owns exactly one responsibility while collaborating exclusively through architectural contracts.
 
+3.7 Relationship with ATH-ARC-380
+
+Runtime Resolution and Persistence Execution own complementary architectural responsibilities.
+
+Runtime Resolution coordinates provider selection, repository activation, and execution orchestration.
+
+Persistence Execution performs persistence operations after runtime coordination has completed.
+
+Runtime Resolution never performs CRUD behavior.
+
+Persistence Execution never resolves providers or coordinates runtime responsibilities.
+
+This separation preserves the single responsibility of both architectural layers while completing the persistence execution chain.
+
 4. Runtime Resolution Flow
 4.1 Architectural Execution Flow
 
@@ -195,16 +210,18 @@ Each architectural participant communicates only with its immediate responsibili
 
 The execution sequence is defined as follows:
 
-Business Domain
-        ↓
+Business
+↓
 Repository Resolution
-        ↓
+↓
 Runtime Resolution
-        ↓
+↓
+Persistence Execution
+↓
 Technology Adapter
-        ↓
-Persistence Provider
-        ↓
+↓
+Concrete Provider
+↓
 Database
 
 Each layer contributes a single architectural responsibility while remaining independent of implementation details.
@@ -243,6 +260,10 @@ Repository Resolution
 Runtime Resolution
 
 → coordinates repository activation.
+
+Persistence Execution
+
+→ performs persistence execution
 
 Technology Adapter
 
@@ -491,19 +512,21 @@ Repository Implementation Foundation
         ↓
 Persistence Mapping Foundation
         ↓
-Repository Resolution Architecture
-        ↓
 Persistence Runtime Foundation
         ↓
-Runtime Resolution Architecture
+Persistence Execution Foundation
         ↓
 Technology Adapter Foundation
         ↓
-Concrete Persistence Provider
+Concrete Provider
         ↓
 Database
 
-Each layer owns a single architectural responsibility and collaborates exclusively through explicitly defined architectural contracts.
+Repository Resolution Architecture and Runtime Resolution Architecture are capability architectures.
+
+They define architectural responsibilities that operate across the persistence architecture but do not introduce additional dependency layers.
+
+Each architectural layer owns a single architectural responsibility and collaborates exclusively through explicitly defined architectural contracts.
 
 7.3 Architectural Integrity
 
@@ -563,7 +586,18 @@ This architecture is complemented by the following architectural documents:
 
 - ATH-ARC-350 — Repository Resolution Architecture
 - ATH-ARC-370 — Repository Foundation Integration Architecture
+- ATH-ARC-380 — Persistence Execution Architecture
 
 ATH-ARC-370 formally defines how the Repository Foundation integrates with the Runtime Resolution Architecture without changing the runtime responsibilities established by ATH-ARC-360.
+
+ATH-ARC-380 formally defines the architectural execution boundary beneath Runtime Resolution.
+
+Runtime Resolution coordinates execution.
+
+Persistence Execution performs persistence operations.
+
+Neither architecture assumes the responsibilities of the other.
+
+Together they complete the persistence execution chain while preserving strict architectural separation.
 
 ATH-ARC-360 remains the authoritative document for Runtime Resolution Architecture.

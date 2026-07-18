@@ -75,6 +75,8 @@ Technology Adapters
         ▼
 External Technologies
 
+This diagram illustrates the high-level Infrastructure layering only. Detailed persistence layering is defined in ATH-ARC-320 and its complementary persistence architecture documents.
+
 Every layer serves the layer above it.
 
 No lower layer may influence the business responsibilities of any upper layer.
@@ -520,7 +522,7 @@ Infrastructure always serves business requirements.
 
 7.3 Collaboration with Persistence Contracts
 
-Infrastructure provides implementations for Persistence Contracts.
+Infrastructure provides implementations that ultimately fulfill Persistence Contracts through the Repository Foundation, Runtime Resolution, Technology Adapters, and Persistence Providers.
 
 Persistence Contracts define what capabilities are required.
 
@@ -532,7 +534,7 @@ Neither layer owns the other.
 
 Repository Foundation defines reusable repository behavior.
 
-Infrastructure provides concrete implementations of those behaviors.
+Infrastructure participates in the execution of Repository Foundation behavior through Runtime Resolution, Persistence Execution, Technology Adapters, and Persistence Providers.
 
 Repository Foundation remains technology independent.
 
@@ -632,6 +634,10 @@ ATH-ARC-311
 ATH-ARC-312
 ATH-ARC-320
 ATH-ARC-330
+ATH-ARC-350
+ATH-ARC-360
+ATH-ARC-370
+ATH-ARC-380
 
 These architectural standards collectively define the permanent foundation of the system.
 

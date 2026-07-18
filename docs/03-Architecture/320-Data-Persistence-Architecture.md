@@ -179,48 +179,36 @@ Its responsibility is limited to maintaining durable representations of Domain s
 The persistence architecture is organized into the following architectural layers.
 
 Business Domain
-
 ↓
-
 Persistence Contracts
-
 ↓
-
 Repository Foundation
-
 ↓
-
 Repository Implementation Foundation
-
 ↓
-
 Persistence Mapping Foundation
-
 ↓
-
 Persistence Runtime Foundation
-
 ↓
-
-Repository Resolution Architecture
-
+Persistence Execution Foundation
 ↓
-
-Runtime Resolution Architecture
-
+Technology Adapter Foundation
 ↓
-
-Technology Adapter
-
+Concrete Provider
 ↓
-
 Database
 
 Repository Resolution Architecture defines how repositories are identified and resolved independently of concrete providers.
 
-Runtime Resolution Architecture defines how the persistence runtime consumes those repository resolution capabilities while coordinating repository activation and provider interaction.
+Runtime Resolution Architecture defines how the persistence runtime resolves providers and coordinates runtime services.
 
-Together, these architectural layers complete the persistence execution chain without introducing provider-specific behavior into higher architectural layers.
+Persistence Execution Architecture introduces the Persistence Execution Foundation the architectural execution boundary responsible for performing persistence operations.
+
+Repository Resolution Architecture and Runtime Resolution Architecture are capability architectures.
+
+They define architectural responsibilities that operate across the persistence architecture without introducing additional dependency layers.
+
+Together, these architectural components complete the persistence architecture. while preserving provider independence and the canonical dependency hierarchy.
 
 Each layer has a single responsibility and communicates only through well-defined contracts.
 
@@ -671,7 +659,10 @@ This architecture is complemented by the following architectural documents:
 - ATH-ARC-350 — Repository Resolution Architecture
 - ATH-ARC-360 — Runtime Resolution Architecture
 - ATH-ARC-370 — Repository Foundation Integration Architecture
+- ATH-ARC-380 — Persistence Execution Architecture
 
 ATH-ARC-370 formally defines the architectural relationship between Repository Contracts, Repository Foundation, Repository Implementation Foundation, Mapping Foundation, Runtime Foundation, and future provider implementations.
+
+ATH-ARC-380 formally defines the Persistence Execution responsibility. It complements the persistence architecture by introducing the execution boundary beneath Repository Implementations without changing the responsibilities of Persistence Contracts, Repository Foundation, Runtime Foundation, or Repository Resolution Architecture.
 
 ATH-ARC-320 remains the authoritative document for Persistence Architecture.

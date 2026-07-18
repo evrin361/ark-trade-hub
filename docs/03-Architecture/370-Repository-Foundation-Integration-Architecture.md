@@ -6,7 +6,7 @@
 | Category | Architecture |
 | Layer | Persistence |
 | Owner | Architecture Board |
-| Depends On | ATH-ARC-320, ATH-ARC-330, ATH-ARC-340 |
+| Depends On | ATH-ARC-320, ATH-ARC-330, ATH-ARC-340, ATH-ARC-350, ATH-ARC-360 |
 | Required By | ATH-DOC-007, ATH-IMP-022, ATH-IMP-021 |
 | Last Updated | 2026-07-17 |
 
@@ -32,9 +32,10 @@ The persistence architecture of ARK Trade Hub has been progressively established
 
 These foundations introduced:
 
-- Persistence Contracts
+- - Persistence Contracts
 - Repository Foundation
 - Repository Implementation Foundation
+- Repository Resolution Architecture
 - Persistence Mapping Foundation
 - Persistence Runtime Foundation
 - Technology Adapter Foundation
@@ -190,33 +191,25 @@ The integration between the Persistence Repository Contracts and the Repository 
 The architectural dependency direction shall remain:
 
 Business Domain
-
 ↓
-
 Persistence Repository Contracts
-
 ↓
-
 Repository Foundation
-
 ↓
-
 Repository Implementation Foundation
-
 ↓
-
 Concrete Repository Implementation
-
 ↓
-
+Repository Resolution
+↓
+Runtime Resolution
+↓
+Persistence Execution
+↓
 Technology Adapter
-
 ↓
-
-Persistence Provider
-
+Concrete Provider
 ↓
-
 Database
 
 No component may introduce a dependency that violates this architectural direction.
@@ -338,10 +331,22 @@ This architecture shall be interpreted together with the following architectural
 - ATH-ARC-340 — Application Architecture
 - ATH-ARC-350 — Repository Resolution Architecture
 - ATH-ARC-360 — Runtime Resolution Architecture
-
-This document complements the existing persistence architecture and does not replace or invalidate any previously approved architectural responsibility.
+- ATH-ARC-380 — Persistence Execution Architecture
+- This document complements the existing persistence architecture and does not replace or invalidate any previously approved architectural responsibility.
 
 Its purpose is solely to formalize the architectural relationship between the Persistence Repository Contracts and the Repository Foundation.
+
+## Relationship with ATH-ARC-380
+
+ATH-ARC-370 governs the architectural integration between Repository Contracts and the Repository Foundation.
+
+ATH-ARC-380 governs the execution of persistence operations beneath Repository Implementations.
+
+Repository Foundation defines reusable repository behavior.
+
+Persistence Execution performs persistence operations after runtime coordination has completed.
+
+The two architectures complement one another while preserving strict architectural separation and provider independence.
 
 ---
 

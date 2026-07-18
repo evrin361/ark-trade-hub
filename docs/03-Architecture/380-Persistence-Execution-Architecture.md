@@ -44,14 +44,17 @@ Those responsibilities remain governed by their respective architectural documen
 
 1.3 Architectural Context
 
-This document extends the persistence architecture defined by:
+It complements the persistence architecture defined by:
 
 ATH-ARC-320 — Data Persistence Architecture
+
 ATH-ARC-350 — Repository Resolution Architecture
+
 ATH-ARC-360 — Runtime Resolution Architecture
+
 ATH-ARC-370 — Repository Foundation Integration Architecture
 
-It introduces no changes to their responsibilities.
+It introduces the architectural execution boundary beneath Repository Implementations without modifying the responsibilities defined by those documents.
 
 Instead, it defines the architectural responsibility that connects Repository Implementations with provider execution while preserving the existing architectural layering and dependency.direction
 
@@ -233,23 +236,23 @@ Instead, it complements them by introducing the missing execution responsibility
 The persistence architecture is therefore extended as follows:
 
 Business Domain
-        ↓
+↓
 Persistence Contracts
-        ↓
+↓
 Repository Foundation
-        ↓
+↓
 Repository Implementation Foundation
-        ↓
+↓
 Persistence Mapping Foundation
-        ↓
+↓
 Persistence Runtime Foundation
-        ↓
+↓
 Persistence Execution Foundation
-        ↓
+↓
 Technology Adapter Foundation
-        ↓
+↓
 Concrete Provider
-        ↓
+↓
 Database
 
 This extension preserves all previously established dependency rules while introducing a dedicated execution boundary.
@@ -278,6 +281,12 @@ storage engines,
 and infrastructure technologies.
 
 Concrete providers shall implement this execution contract according to their own technology without altering higher architectural layers.
+
+Persistence Execution consumes the Runtime Foundation after repository resolution has completed.
+
+It never performs provider discovery, lifecycle management, or repository selection.
+
+Those responsibilities remain owned by Repository Resolution and Runtime Resolution.
 
 4.5 Architectural Ownership
 
@@ -310,6 +319,7 @@ construct provider clients,
 access provider SDKs,
 manage provider lifecycle,
 or implement persistence technologies.
+
 5.2 Persistence Execution Foundation
 
 Persistence Execution Foundation owns the execution of persistence operations.
@@ -322,13 +332,13 @@ preserving provider independence,
 exposing a provider-neutral execution contract.
 
 Persistence Execution Foundation shall not:
-
 contain business rules,
 perform entity mapping,
 resolve providers,
 manage provider lifecycle,
 expose provider-specific APIs,
 or define repository behavior.
+
 5.3 Persistence Runtime Foundation
 
 Persistence Runtime Foundation continues to own runtime coordination.
@@ -397,7 +407,7 @@ The persistence execution architecture preserves the one-directional dependency 
 
 The approved dependency flow is:
 
-Business Domain
+ Business Domain
         ↓
 Persistence Contracts
         ↓
@@ -481,6 +491,7 @@ ATH-ARC-380 — Persistence Execution Architecture
 
 These documents collectively define the canonical persistence architecture of ARK Trade Hub.
 
+
 7. Summary
 7.1 Architectural Outcome
 
@@ -491,6 +502,14 @@ The architecture now distinguishes three independent responsibilities:
 Repository behavior,
 Runtime coordination,
 Persistence execution.
+
+Repository Resolution remains responsible for repository identification.
+
+Runtime Resolution remains responsible for runtime orchestration.
+
+Persistence Execution becomes responsible exclusively for persistence execution.
+
+These responsibilities are intentionally independent and sequential.
 
 Each responsibility is assigned to a dedicated architectural layer, preserving the separation of concerns established throughout the persistence architecture.
 
@@ -527,6 +546,8 @@ The architectural clarification provided by ATH-ARC-380 enables the continuation
 In particular, it establishes the architectural foundation required for:
 
 ATH-IMP-023 — Persistence Execution Foundation
+ATH-DOC-008 — Persistence Execution Synchronization
+
 Resumption and completion of ATH-IMP-021 — Customer Repository Foundation
 
 No implementation shall introduce persistence execution behavior outside the boundaries defined by this document.
@@ -554,4 +575,4 @@ Architecture Identifier: ATH-ARC-380
 
 Title: Persistence Execution Architecture
 
-Classification: Core Persistence Architecture.
+Classification: Core Persistence Architecture
