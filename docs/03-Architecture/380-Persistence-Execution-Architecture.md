@@ -10,6 +10,12 @@ This document does not redesign any existing architectural component.
 
 Instead, it complements the existing architecture by defining the execution responsibility that was intentionally left unspecified during the construction of the Persistence Foundation.
 
+ Following the introduction of ATH-ARC-390, Persistence Execution operates exclusively on persistence-facing identities.
+
+Execution components remain independent from feature model identity implementations and consume only the persistence identity abstractions defined by the persistence architecture.
+
+This preserves execution neutrality while allowing feature models to maintain independent business identities.
+
 1.2 Scope
 
 This architecture applies exclusively to the execution of persistence operations initiated by Repository Implementations.
@@ -213,6 +219,22 @@ deployment environment,
 or infrastructure provider.
 
 Technology-specific behavior belongs exclusively to concrete provider implementations.
+
+3.8 Persistence Identity Isolation
+
+Persistence Execution shall never depend directly on feature model identities.
+
+Execution components consume persistence identities exclusively through the contracts established by the persistence architecture.
+
+Feature model identity alignment is governed by ATH-ARC-390 and remains outside the responsibility of Persistence Execution.
+
+3.9 Feature Model Independence
+
+Persistence Execution shall remain completely independent from feature model implementations.
+
+Execution pipelines, execution contexts, execution contracts, and execution results must not require feature entities to implement persistence contracts directly.
+
+Identity translation occurs before persistence execution begins
 
 4. Persistence Execution Architecture
 4.1 Architectural Responsibility
@@ -488,6 +510,7 @@ ATH-ARC-350 — Repository Resolution Architecture
 ATH-ARC-360 — Runtime Resolution Architecture
 ATH-ARC-370 — Repository Foundation Integration Architecture
 ATH-ARC-380 — Persistence Execution Architecture
+ATH-ARC-390 — Feature Persistence Identity Architecture
 
 These documents collectively define the canonical persistence architecture of ARK Trade Hub.
 

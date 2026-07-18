@@ -64,6 +64,12 @@ To preserve Architecture-First Development and prevent implementation tasks from
 
 This document provides that formal architectural definition.
 
+Following the approval of ATH-ARC-390, the Repository Foundation Integration Architecture also formally distinguishes between business feature identities and persistence identities.
+
+Repository abstractions no longer require feature models to expose persistence-specific identity contracts directly.
+
+Instead, Feature Persistence Identity provides the architectural alignment between feature models and the persistence architecture while preserving the independence of both layers.
+
 # 3. Architectural Principles
 
 The Repository Foundation Integration Architecture is governed by the following architectural principles.
@@ -180,6 +186,16 @@ Only after repository capabilities are formally defined may the Repository Found
 
 Repository implementations, providers, or technology adapters shall never become the origin of new repository behavior.
 
+## 4.6 Feature Persistence Identity
+
+Repository Foundation abstractions shall operate on persistence identities rather than directly depending on feature model identity implementations.
+
+Feature models remain responsible for their own business identities.
+
+Feature Persistence Identity provides the architectural bridge that aligns feature models with repository contracts without introducing direct coupling between the Business Domain and the Persistence Foundation.
+
+This separation preserves provider neutrality, repository generic consistency, and architectural independence.
+
 # 5. Dependency and Generic Constraints
 
 The integration between the Persistence Repository Contracts and the Repository Foundation shall comply with the following architectural constraints.
@@ -265,6 +281,15 @@ Future provider implementations, runtime improvements, or mapping enhancements s
 
 Provider evolution shall occur below the Repository Foundation within the persistence architecture.
 
+## 5.7 Identity Separation
+
+Repository generic abstractions shall depend only on persistence identity contracts.
+
+Feature models shall not be required to implement persistence contracts directly.
+
+Identity alignment between feature models and persistence abstractions is governed exclusively by ATH-ARC-390.
+
+This guarantees that repository contracts remain reusable across independent feature modules.
 
 # 6. Architectural Consequences
 
@@ -332,7 +357,9 @@ This architecture shall be interpreted together with the following architectural
 - ATH-ARC-350 — Repository Resolution Architecture
 - ATH-ARC-360 — Runtime Resolution Architecture
 - ATH-ARC-380 — Persistence Execution Architecture
-- This document complements the existing persistence architecture and does not replace or invalidate any previously approved architectural responsibility.
+- ATH-ARC-390 — Feature Persistence Identity Architecture
+
+This document complements the existing persistence architecture and does not replace or invalidate any previously approved architectural responsibility.
 
 Its purpose is solely to formalize the architectural relationship between the Persistence Repository Contracts and the Repository Foundation.
 
@@ -347,6 +374,10 @@ Repository Foundation defines reusable repository behavior.
 Persistence Execution performs persistence operations after runtime coordination has completed.
 
 The two architectures complement one another while preserving strict architectural separation and provider independence.
+
+ATH-ARC-390 complements both architectures by defining how feature identities participate in repository integration without exposing persistence contracts directly to feature models.
+
+Repository Foundation continues to consume persistence contracts, while Feature Persistence Identity preserves the architectural separation between business models and persistence abstractions
 
 ---
 

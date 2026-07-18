@@ -110,7 +110,11 @@ The recommended reading sequence is:
        Persistence Execution Architecture
                           │
                           ▼
-              Implementation Roadmap
+                     ATH-ARC-390
+       Feature Persistence Identity Architecture       
+                          │
+                          ▼
+                  Implementation Roadmap
                           │
                           ▼
               Implementation Tasks
@@ -274,3 +278,4 @@ New documents should integrate into the existing hierarchy rather than creating 
 - ATH-ARC-360 — Runtime Resolution Architecture
 - ATH-ARC-370 — Repository Foundation Integration Architecture
 - ATH-ARC-380 — Persistence Execution Architecture
+- ATH-ARC-390 — Feature Persistence Identity Architecture
