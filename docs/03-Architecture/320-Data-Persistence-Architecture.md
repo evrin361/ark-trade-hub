@@ -660,9 +660,30 @@ This architecture is complemented by the following architectural documents:
 - ATH-ARC-360 — Runtime Resolution Architecture
 - ATH-ARC-370 — Repository Foundation Integration Architecture
 - ATH-ARC-380 — Persistence Execution Architecture
+- ATH-ARC-390 — Feature Persistence Identity Architecture
 
 ATH-ARC-370 formally defines the architectural relationship between Repository Contracts, Repository Foundation, Repository Implementation Foundation, Mapping Foundation, Runtime Foundation, and future provider implementations.
 
 ATH-ARC-380 formally defines the Persistence Execution responsibility. It complements the persistence architecture by introducing the execution boundary beneath Repository Implementations without changing the responsibilities of Persistence Contracts, Repository Foundation, Runtime Foundation, or Repository Resolution Architecture.
 
 ATH-ARC-320 remains the authoritative document for Persistence Architecture.
+
+Relationship with ATH-ARC-390
+
+The Persistence Architecture distinguishes between business identity and persistence identity.
+
+Business entities continue to own their business identifiers as defined by the Business Domain.
+
+Feature Persistence Identity introduces a persistence-facing identity model that enables persistence contracts, repository foundations, runtime coordination, and execution pipelines to remain independent from feature-specific business models.
+
+Persistence components therefore operate on persistence identities rather than directly depending on feature entities.
+
+This separation preserves:
+
+Business independence
+Repository generic consistency
+Provider independence
+Runtime neutrality
+Long-term architectural stability
+
+ATH-ARC-390 formally defines the architectural relationship between Feature Models and the Persistence Architecture without modifying the existing persistence execution chain
