@@ -7,4 +7,6 @@
  * ============================================================
  */
 
-export interface ExecutionResult {}
+import type { Result } from "@/contracts/persistence";
+
+export type ExecutionResult<TResult = unknown> = Result<TResult, Error>;

@@ -1,10 +1,12 @@
-/**
- * ============================================================
- * ARK Trade Hub
- * Persistence Execution Foundation
- * ------------------------------------------------------------
- * Execution Contract
- * ============================================================
- */
+import type { ExecutionContext } from "../context";
+import type { ExecutionResult } from "./execution-result";
 
-export interface Execution {}
+export interface Execution<
+  TRequest = unknown,
+  TResult = unknown,
+> {
+  execute(
+    request: TRequest,
+    context: ExecutionContext,
+  ): Promise<ExecutionResult<TResult>>;
+}
