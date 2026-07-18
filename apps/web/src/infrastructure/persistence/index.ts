@@ -16,3 +16,10 @@ export type {
 export type {
   RepositoryOptions,
 } from "./common";
+
+export type {
+  Execution,
+  ExecutionResult,
+  ExecutionContext,
+  ExecutionPipeline,
+} from "./execution";
