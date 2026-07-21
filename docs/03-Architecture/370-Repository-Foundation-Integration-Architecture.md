@@ -32,7 +32,7 @@ The persistence architecture of ARK Trade Hub has been progressively established
 
 These foundations introduced:
 
-- - Persistence Contracts
+- Persistence Contracts
 - Repository Foundation
 - Repository Implementation Foundation
 - Repository Resolution Architecture
@@ -69,6 +69,8 @@ Following the approval of ATH-ARC-390, the Repository Foundation Integration Arc
 Repository abstractions no longer require feature models to expose persistence-specific identity contracts directly.
 
 Instead, Feature Persistence Identity provides the architectural alignment between feature models and the persistence architecture while preserving the independence of both layers.
+
+The architectural identity model used by the Persistence Repository Contracts is formally defined by ATH-ARC-400. Repository Contracts therefore rely on a canonical persistence identity representation while remaining independent from feature-specific business models.
 
 # 3. Architectural Principles
 
@@ -166,6 +168,8 @@ The Repository Foundation is responsible only for providing reusable architectur
 
 Authority over repository behavior belongs to the contracts, not to the foundation.
 
+Generic repository contracts preserve the persistence identity semantics established by ATH-ARC-400. Repository Foundation implementations shall not redefine or replace the architectural identity model defined by the Persistence Architecture.
+
 ---
 
 ## 4.4 Foundation Dependency Direction
@@ -207,25 +211,37 @@ The integration between the Persistence Repository Contracts and the Repository 
 The architectural dependency direction shall remain:
 
 Business Domain
+
 ↓
+
+Entity Identity Value Object Foundation (ATH-ARC-400)
+
+↓
+
 Persistence Repository Contracts
+
 ↓
+
 Repository Foundation
+
 ↓
+
 Repository Implementation Foundation
+
 ↓
+
 Concrete Repository Implementation
+
 ↓
-Repository Resolution
-↓
-Runtime Resolution
-↓
-Persistence Execution
-↓
+
 Technology Adapter
+
 ↓
-Concrete Provider
+
+Persistence Provider
+
 ↓
+
 Database
 
 No component may introduce a dependency that violates this architectural direction.
@@ -388,6 +404,7 @@ The following documentation and implementation tasks directly depend on this arc
 - ATH-DOC-007 — Repository Foundation Integration Synchronization
 - ATH-IMP-022 — Repository Foundation Integration
 - ATH-IMP-021 — Customer Repository Foundation
+- ATH-ARC-400 — Entity Identity Value Object Architecture
 
 Future repository implementations shall assume this architectural relationship as part of the official persistence architecture.
 
@@ -412,6 +429,8 @@ With the approval of ATH-ARC-370, the Persistence Architecture reaches a fully g
 The architectural responsibilities of the persistence layer, their dependency direction, and their formal relationships are now explicitly documented.
 
 Future implementation work may proceed without introducing architectural assumptions regarding repository behavior.
+
+The Repository Foundation therefore realizes repository behavior defined by the Persistence Repository Contracts while preserving the architectural identity model established by ATH-ARC-400.
 
 This document completes the architectural governance of the Repository Foundation and establishes a stable baseline for all subsequent persistence development.
 

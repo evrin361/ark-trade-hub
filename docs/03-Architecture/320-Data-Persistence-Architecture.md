@@ -180,7 +180,9 @@ The persistence architecture is organized into the following architectural layer
 
 Business Domain
 ↓
-Persistence Contracts
+Entity Identity Value Object Foundation (ATH-ARC-400)
+↓
+Persistence Repository Contracts
 ↓
 Repository Foundation
 ↓
@@ -661,6 +663,7 @@ This architecture is complemented by the following architectural documents:
 - ATH-ARC-370 — Repository Foundation Integration Architecture
 - ATH-ARC-380 — Persistence Execution Architecture
 - ATH-ARC-390 — Feature Persistence Identity Architecture
+- ATH-ARC-400 — Entity Identity Value Object Architecture
 
 ATH-ARC-370 formally defines the architectural relationship between Repository Contracts, Repository Foundation, Repository Implementation Foundation, Mapping Foundation, Runtime Foundation, and future provider implementations.
 
@@ -675,6 +678,8 @@ The Persistence Architecture distinguishes between business identity and persist
 Business entities continue to own their business identifiers as defined by the Business Domain.
 
 Feature Persistence Identity introduces a persistence-facing identity model that enables persistence contracts, repository foundations, runtime coordination, and execution pipelines to remain independent from feature-specific business models.
+
+The construction and lifecycle of persistence identities are formally governed by ATH-ARC-400. Persistence Repository Contracts use the Entity Identity Value Object defined by ATH-ARC-400 as the canonical representation of persistence identity. as the canonical architectural representation of entity identity, while remaining independent from concrete implementations.
 
 Persistence components therefore operate on persistence identities rather than directly depending on feature entities.
 

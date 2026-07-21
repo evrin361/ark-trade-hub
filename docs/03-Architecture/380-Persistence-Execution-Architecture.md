@@ -81,6 +81,8 @@ Repository Foundation Integration
 
 These architectural layers collectively establish the structural foundation required for provider-independent persistence.
 
+Before persistence execution begins, entity identity is already standardized through ATH-ARC-400. Persistence Execution therefore operates on canonical persistence identities without participating in their construction, validation, or lifecycle management.
+
 2.2 Architectural Observation
 
 During implementation of ATH-IMP-021 — Customer Repository Foundation, the first concrete Repository Implementation reached the point where persistence operations required execution against a persistence provider.
@@ -258,24 +260,46 @@ Instead, it complements them by introducing the missing execution responsibility
 The persistence architecture is therefore extended as follows:
 
 Business Domain
+
 ↓
-Persistence Contracts
+
+Entity Identity Value Object Foundation (ATH-ARC-400)
+
 ↓
+
+Persistence Repository Contracts
+
+↓
+
 Repository Foundation
+
 ↓
+
 Repository Implementation Foundation
+
 ↓
+
 Persistence Mapping Foundation
+
 ↓
+
 Persistence Runtime Foundation
+
 ↓
+
 Persistence Execution Foundation
+
 ↓
+
 Technology Adapter Foundation
+
 ↓
+
 Concrete Provider
+
 ↓
-Database
+
+Database 
 
 This extension preserves all previously established dependency rules while introducing a dedicated execution boundary.
 
@@ -288,6 +312,8 @@ Persistence Execution becomes the only architectural component responsible for i
 Repository Implementations shall never execute provider operations directly.
 
 Likewise, provider implementations shall never become directly visible to Repository Implementations.
+
+Identity construction belongs exclusively to ATH-ARC-400. Persistence Execution treats entity identity as immutable architectural input and must never redefine, reconstruct, or reinterpret persistence identities.
 
 4.4 Execution Contract
 
@@ -375,6 +401,8 @@ runtime coordination.
 Runtime Foundation shall not execute persistence operations.
 
 Execution responsibility belongs exclusively to the Persistence Execution Foundation.
+
+Persistence Execution consumes the canonical persistence identity supplied by the Repository layer. It neither constructs nor modifies the Entity Identity Value Object defined by ATH-ARC-400.
 
 5.4 Technology Adapter Foundation
 
@@ -511,6 +539,7 @@ ATH-ARC-360 — Runtime Resolution Architecture
 ATH-ARC-370 — Repository Foundation Integration Architecture
 ATH-ARC-380 — Persistence Execution Architecture
 ATH-ARC-390 — Feature Persistence Identity Architecture
+ATH-ARC-400 — Entity Identity Value Object Architecture
 
 These documents collectively define the canonical persistence architecture of ARK Trade Hub.
 
