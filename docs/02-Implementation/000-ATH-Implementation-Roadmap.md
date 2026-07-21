@@ -151,6 +151,7 @@ In Progress
 | ATH-ARC-380 | Persistence Execution Architecture | Completed |
 | ATH-DOC-008 | Persistence Execution Synchronization | Completed |
 | ATH-ARC-390 | Feature Persistence Identity Architecture | Approved |
+| ATH-ARC-400 | Entity Identity Value Object Architecture | Approved |
 
 
 ### Architectural Foundation
