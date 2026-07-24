@@ -1,23 +1,30 @@
-import type { CustomerRepository } from "./customer.repository";
 import type { Customer } from "../types/customer";
 import { customerSeed } from "../seed/customers";
+import type {
+  CustomerRepository,
+} from "./customer.repository";
 
-export class MockCustomerRepository implements CustomerRepository {
+import type {
+  EntityId,
+} from "@/contracts/persistence";
+
+export class MockCustomerRepository
+  implements CustomerRepository {
+
   private customers: Customer[];
 
   constructor() {
     this.customers = [...customerSeed];
   }
-
   async getAll(): Promise<Customer[]> {
     return [...this.customers];
   }
 
   async getById(
-    id: string
+    id: EntityId
   ): Promise<Customer | undefined> {
     return this.customers.find(
-      (customer) => customer.id === id
+      (customer) => customer.id.value === id.value
     );
   }
 
@@ -34,7 +41,7 @@ export class MockCustomerRepository implements CustomerRepository {
   ): Promise<Customer> {
     this.customers = this.customers.map(
       (item) =>
-        item.id === customer.id
+        item.id.value === customer.id.value
           ? customer
           : item
     );
@@ -43,12 +50,12 @@ export class MockCustomerRepository implements CustomerRepository {
   }
 
   async delete(
-    id: string
+    id: EntityId
   ): Promise<void> {
     this.customers =
       this.customers.filter(
         (customer) =>
-          customer.id !== id
+          customer.id.value !== id.value
       );
   }
 }

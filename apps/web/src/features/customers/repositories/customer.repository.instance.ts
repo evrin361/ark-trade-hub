@@ -1,5 +1,10 @@
-import { MockCustomerRepository } from "./mock-customer.repository";
+import { CustomerRepositoryImpl } from "./customer.repository.impl";
+
+import { MockCustomerRepository } from "@/infrastructure/persistence/repositories/customer/mock-customer-repository";
+
 import type { CustomerRepository } from "./customer.repository";
 
 export const customerRepository: CustomerRepository =
-  new MockCustomerRepository();
+  new CustomerRepositoryImpl(
+    new MockCustomerRepository()
+  );

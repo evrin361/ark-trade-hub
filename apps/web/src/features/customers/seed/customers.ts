@@ -2,10 +2,11 @@ import type { Customer } from "../types/customer";
 
 export const customerSeed: Customer[] = [
   {
-    id: "customer-ebrahim",
+   id: {
+  value: "customer-ebrahim",
+},
 
-    organizationId: "organization-default",
-    
+organizationId: "organization-default",    
     firstName: "ابراهیم",
 
     lastName: "غفاری",

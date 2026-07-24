@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import type { Customer } from "../types/customer";
+import type { EntityId } from "@/contracts/persistence";
 
 
 interface CustomersTableProps {
@@ -18,11 +19,11 @@ interface CustomersTableProps {
 
   onEdit: (customer: Customer) => void;
 
-  onToggleStatus: (id: string) => void;
+  onToggleStatus: (id: EntityId) => void;
 
-  onArchive: (id: string) => void;
+onArchive: (id: EntityId) => void;
 
-  onRestore: (id: string) => void;
+onRestore: (id: EntityId) => void;
 }
 
 
@@ -40,7 +41,7 @@ export function CustomersTable({
       {customers.map((customer) => (
 
         <Card
-          key={customer.id}
+          key={customer.id.value}
           className="
             px-8
             py-8
