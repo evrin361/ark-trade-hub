@@ -657,49 +657,33 @@ Business entities, feature models, repository contracts, runtime coordination, p
 Following ATH-ARC-390, the persistence architecture is composed of the following architectural responsibilities:
 
 Business Domain
-
 ↓
-
 Feature Models
-
 ↓
-
 Feature Persistence Identity
-
 ↓
-
+Feature Repository
+↓
+Repository Boundary Translation (ATH-ARC-410)
+↓
+Entity Identity Value Object (ATH-ARC-400)
+↓
 Persistence Contracts
-
 ↓
-
 Repository Foundation
-
 ↓
-
 Repository Implementation Foundation
-
 ↓
-
 Persistence Mapping Foundation
-
 ↓
-
 Persistence Runtime Foundation
-
 ↓
-
 Persistence Execution Foundation
-
 ↓
-
 Technology Adapter Foundation
-
 ↓
-
 Concrete Provider
-
 ↓
-
 Database
 
 Feature Persistence Identity establishes the architectural bridge between Feature models and the persistence identity model.
@@ -862,8 +846,11 @@ ATH-ARC-350 — Repository Resolution Architecture
 ATH-ARC-360 — Runtime Resolution Architecture
 ATH-ARC-370 — Repository Foundation Integration Architecture
 ATH-ARC-380 — Persistence Execution Architecture
+ATH-ARC-400 — Entity Identity Value Object Architecture
+ATH-ARC-410 — Repository Boundary Translation Architecture
 
 ATH-ARC-390 complements these documents by defining how Feature Models participate in the persistence identity model.
+
 
 It does not replace or modify the responsibilities established by previous architectural documents.
 
@@ -883,7 +870,7 @@ The following documentation and implementation tasks directly depend on this arc
 
 ATH-DOC-009 — Feature Persistence Identity Synchronization
 ATH-IMP-021 — Customer Repository Foundation (Resume)
-
+ATH-ARC-410 — Repository Boundary Translation Architecture
 Future Feature implementations that participate in persistence shall assume the architectural rules established by ATH-ARC-390.
 
 Architectural Decision
@@ -905,6 +892,8 @@ All architectural responsibilities required for provider-independent persistence
 Future implementation work may continue without introducing architectural assumptions regarding persistence identity.
 
 This document completes the architectural definition of Feature participation within the Persistence Architecture.
+
+Feature Persistence Identity and Repository Boundary Translation together complete the separation between Feature Models and Persistence infrastructure while preserving canonical architectural identity across repository interaction.
 
 Closing Principle
 

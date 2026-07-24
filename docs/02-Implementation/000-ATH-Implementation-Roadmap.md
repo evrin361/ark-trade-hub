@@ -152,6 +152,8 @@ In Progress
 | ATH-DOC-008 | Persistence Execution Synchronization | Completed |
 | ATH-ARC-390 | Feature Persistence Identity Architecture | Approved |
 | ATH-ARC-400 | Entity Identity Value Object Architecture | Approved |
+| ATH-ARC-410 | Repository Boundary Translation Architecture | Approved |
+| ATH-DOC-011 | Repository Boundary Translation Synchronization | Completed |
 
 
 ### Architectural Foundation
@@ -333,6 +335,8 @@ ATH-IMP-021 — Customer Repository Foundation
 Current Status:
 
 Ready for Implementation
+
+Architecture Baseline Completed (ATH-ARC-410)
 ---
 
 # 9. Completed Tasks
