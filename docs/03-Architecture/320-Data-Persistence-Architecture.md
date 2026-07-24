@@ -180,7 +180,13 @@ The persistence architecture is organized into the following architectural layer
 
 Business Domain
 ↓
-Entity Identity Value Object Foundation (ATH-ARC-400)
+Feature Services
+↓
+Feature Repository
+↓
+Repository Boundary Translation (ATH-ARC-410)
+↓
+Entity Identity Value Object (ATH-ARC-400)
 ↓
 Persistence Repository Contracts
 ↓
@@ -650,6 +656,9 @@ The Business Domain remains the permanent foundation of the system.
 
 All future architectural decisions should be evaluated against this principle before implementation.
 
+Repository interaction across the Feature–Persistence boundary is formally governed by ATH-ARC-410, completing the architectural governance of the Persistence Architecture.
+
+
 ---
 
 # Related Architecture
@@ -664,6 +673,7 @@ This architecture is complemented by the following architectural documents:
 - ATH-ARC-380 — Persistence Execution Architecture
 - ATH-ARC-390 — Feature Persistence Identity Architecture
 - ATH-ARC-400 — Entity Identity Value Object Architecture
+- ATH-ARC-410 — Repository Boundary Translation Architecture
 
 ATH-ARC-370 formally defines the architectural relationship between Repository Contracts, Repository Foundation, Repository Implementation Foundation, Mapping Foundation, Runtime Foundation, and future provider implementations.
 

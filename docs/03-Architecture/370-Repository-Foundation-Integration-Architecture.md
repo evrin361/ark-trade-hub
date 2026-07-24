@@ -72,6 +72,13 @@ Instead, Feature Persistence Identity provides the architectural alignment betwe
 
 The architectural identity model used by the Persistence Repository Contracts is formally defined by ATH-ARC-400. Repository Contracts therefore rely on a canonical persistence identity representation while remaining independent from feature-specific business models.
 
+Following the approval of ATH-ARC-410, Repository Foundation Integration is no longer the final architectural boundary separating Feature Repositories from the Persistence Architecture.
+
+Repository Foundation Integration continues to govern the relationship between Repository Contracts and Repository Foundation.
+
+Repository Boundary Translation now governs how Feature Repository contracts expose Feature-oriented contracts while consuming the canonical Repository Foundation contracts without leaking persistence abstractions into the Feature layer.
+
+
 # 3. Architectural Principles
 
 The Repository Foundation Integration Architecture is governed by the following architectural principles.
@@ -170,6 +177,13 @@ Authority over repository behavior belongs to the contracts, not to the foundati
 
 Generic repository contracts preserve the persistence identity semantics established by ATH-ARC-400. Repository Foundation implementations shall not redefine or replace the architectural identity model defined by the Persistence Architecture.
 
+Feature Repository contracts inherit the canonical Repository Foundation contracts defined by this architecture.
+
+However, the architectural translation between Feature-facing contracts and Persistence-facing contracts is governed exclusively by ATH-ARC-410.
+
+Repository Foundation therefore remains the canonical persistence contract while Repository Boundary Translation preserves Feature independence.
+
+
 ---
 
 ## 4.4 Foundation Dependency Direction
@@ -211,37 +225,27 @@ The integration between the Persistence Repository Contracts and the Repository 
 The architectural dependency direction shall remain:
 
 Business Domain
-
 ↓
-
+Feature Services
+↓
+Feature Repository
+↓
+Repository Boundary Translation (ATH-ARC-410)
+↓
 Entity Identity Value Object Foundation (ATH-ARC-400)
-
 ↓
-
 Persistence Repository Contracts
-
 ↓
-
 Repository Foundation
-
 ↓
-
 Repository Implementation Foundation
-
 ↓
-
 Concrete Repository Implementation
-
 ↓
-
 Technology Adapter
-
 ↓
-
 Persistence Provider
-
 ↓
-
 Database
 
 No component may introduce a dependency that violates this architectural direction.
@@ -374,10 +378,16 @@ This architecture shall be interpreted together with the following architectural
 - ATH-ARC-360 — Runtime Resolution Architecture
 - ATH-ARC-380 — Persistence Execution Architecture
 - ATH-ARC-390 — Feature Persistence Identity Architecture
+- ATH-ARC-400 — Entity Identity Value Object Architecture
+- ATH-ARC-410 — Repository Boundary Translation Architecture
 
 This document complements the existing persistence architecture and does not replace or invalidate any previously approved architectural responsibility.
 
 Its purpose is solely to formalize the architectural relationship between the Persistence Repository Contracts and the Repository Foundation.
+
+Repository Foundation shall never expose persistence-specific contracts directly to Feature Services.
+
+Architectural translation across the Feature–Persistence boundary is governed exclusively by ATH-ARC-410.
 
 ## Relationship with ATH-ARC-380
 
@@ -395,6 +405,10 @@ ATH-ARC-390 complements both architectures by defining how feature identities pa
 
 Repository Foundation continues to consume persistence contracts, while Feature Persistence Identity preserves the architectural separation between business models and persistence abstractions
 
+ATH-ARC-410 complements Repository Foundation Integration by governing the architectural translation between Feature Repository contracts and the canonical Repository Foundation contracts.
+
+Together, ATH-ARC-370 and ATH-ARC-410 preserve Feature independence while maintaining Repository Foundation reuse across the Persistence Architecture.
+
 ---
 
 # Related Documentation
@@ -405,6 +419,7 @@ The following documentation and implementation tasks directly depend on this arc
 - ATH-IMP-022 — Repository Foundation Integration
 - ATH-IMP-021 — Customer Repository Foundation
 - ATH-ARC-400 — Entity Identity Value Object Architecture
+- ATH-ARC-410 — Repository Boundary Translation Architecture
 
 Future repository implementations shall assume this architectural relationship as part of the official persistence architecture.
 
@@ -434,5 +449,5 @@ The Repository Foundation therefore realizes repository behavior defined by the 
 
 This document completes the architectural governance of the Repository Foundation and establishes a stable baseline for all subsequent persistence development.
 
-
+Repository Foundation Integration and Repository Boundary Translation together complete the architectural governance of repository interaction across the Persistence Architecture.
 

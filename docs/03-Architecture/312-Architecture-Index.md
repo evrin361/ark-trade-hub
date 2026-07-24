@@ -59,7 +59,7 @@ The recommended reading sequence is:
 13. ATH-ARC-380 — Persistence Execution Architecture
 14. ATH-ARC-390 — Feature Persistence Identity Architecture
 15. ATH-ARC-400 — Entity Identity Value Object Architecture
-
+16. ATH-ARC-410 — Repository Boundary Translation Architecture
 ---
 
 # 4. Architecture Map
@@ -113,7 +113,15 @@ The recommended reading sequence is:
                           │
                           ▼
                      ATH-ARC-390
-       Feature Persistence Identity Architecture       
+       Feature Persistence Identity Architecture    
+                          │
+                          ▼
+                     ATH-ARC-400
+       Entity Identity Value Object Architecture
+                          │
+                          ▼
+                     ATH-ARC-410   
+       Repository Boundary Translation Architecture
                           │
                           ▼
                   Implementation Roadmap
@@ -193,6 +201,14 @@ Defines the architectural execution boundary responsible for performing persiste
 Separates repository resolution from persistence execution while preserving provider independence and dependency direction.
 
 Complements the persistence architecture by establishing the execution responsibility beneath Repository Implementations without modifying existing architectural responsibilities.
+
+## ATH-ARC-410 — Repository Boundary Translation Architecture
+
+Defines the architectural anti-corruption boundary between Feature Repository contracts and the canonical Persistence Repository Foundation.
+
+Preserves Feature independence while allowing Repository Foundation reuse across the Persistence Architecture.
+
+Governs architectural contract translation without prescribing implementation mechanisms.
 
 # 6. Architectural Dependency Rules
 
@@ -282,3 +298,4 @@ New documents should integrate into the existing hierarchy rather than creating 
 - ATH-ARC-380 — Persistence Execution Architecture
 - ATH-ARC-390 — Feature Persistence Identity Architecture
 - ATH-ARC-400 — Entity Identity Value Object Architecture
+- ATH-ARC-410 — Repository Boundary Translation Architecture
