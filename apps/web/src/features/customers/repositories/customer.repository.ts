@@ -1,10 +1,12 @@
 import type { Customer } from "../types/customer";
 
+import type { EntityId } from "@/contracts/persistence";
+
 export interface CustomerRepository {
   getAll(): Promise<Customer[]>;
 
   getById(
-    id: string
+    id: EntityId
   ): Promise<Customer | undefined>;
 
   create(
@@ -16,6 +18,6 @@ export interface CustomerRepository {
   ): Promise<Customer>;
 
   delete(
-    id: string
+    id: EntityId
   ): Promise<void>;
 }

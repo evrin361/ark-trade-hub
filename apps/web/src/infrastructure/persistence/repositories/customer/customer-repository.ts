@@ -7,6 +7,8 @@
  * ============================================================
  */
 
+import type { Customer } from "@/features/customers/types/customer";
+
 import type {
   BaseReadRepository,
 } from "../../base/base-read-repository";
@@ -17,5 +19,5 @@ import type {
 
 export interface CustomerRepository
   extends
-    BaseReadRepository,
-    BaseWriteRepository {}
+    BaseReadRepository<Customer>,
+    BaseWriteRepository<Customer> {}

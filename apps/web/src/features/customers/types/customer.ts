@@ -6,12 +6,12 @@
  * Customer
  * ============================================================
  */
-
+import type { EntityId } from "@/contracts/persistence";
 export interface Customer {
   /**
    * Internal Identifier
    */
-  id: string;
+  id: EntityId;
 
 
   /**

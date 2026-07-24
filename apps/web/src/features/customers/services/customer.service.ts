@@ -1,5 +1,6 @@
 import type { Customer } from "../types/customer";
 import type { CustomerRepository } from "../repositories/customer.repository";
+import type { EntityId } from "@/contracts/persistence";
 
 type ServiceResult<T> =
   | {
@@ -51,7 +52,7 @@ return {
 
 
   async getById(
-  id: string
+  id: EntityId
 ): Promise<ServiceResult<Customer>> {
 
   try {
@@ -94,7 +95,9 @@ return {
     const now = new Date();
 
     const newCustomer: Customer = {
-      id: crypto.randomUUID(),
+      id: {
+  value: crypto.randomUUID(),
+},
       
       organizationId: data.organizationId,
 
@@ -139,7 +142,7 @@ return {
 },
 
   async update(
-    id: string,
+    id: EntityId,
     data: {
       firstName: string;
       lastName: string;
@@ -191,7 +194,7 @@ return {
 
 
   async delete(
-    id: string
+    id: EntityId
   ): Promise<void> {
 
     return repository.delete(id);
@@ -199,7 +202,7 @@ return {
 
 
   async archive(
-    id: string
+    id: EntityId
   ): Promise<ServiceResult<Customer>> {
 
     const customer =
@@ -238,7 +241,7 @@ return {
 
 
   async restore(
-    id: string
+    id: EntityId
   ): Promise<ServiceResult<Customer>> {
 
     const customer =
@@ -274,7 +277,7 @@ return {
 
 
   async toggleStatus(
-    id: string
+    id: EntityId
   ): Promise<ServiceResult<Customer>> {
 
     const customer =

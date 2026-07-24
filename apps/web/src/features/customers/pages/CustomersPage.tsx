@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Button } from "@/components/ui/Button";
 import { CustomersTable } from "../components/CustomersTable";
+import type { EntityId } from "@/contracts/persistence";
 
 import {
   Pencil,
@@ -39,7 +40,7 @@ const [lastName, setLastName] = useState("");
 const [mobile, setMobile] = useState("");
 const [email, setEmail] = useState("");
 const [code, setCode] = useState("");
-const [editingId, setEditingId] = useState<string | null>(null);
+const [editingId, setEditingId] = useState<EntityId | null>(null);
 const DEFAULT_ORGANIZATION_ID =
   "default-organization";
 

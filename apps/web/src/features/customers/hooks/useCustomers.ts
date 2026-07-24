@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { customerService } from "../services/customer.service.instance";
 import type { Customer } from "../types/customer";
-
+import type { EntityId } from "@/contracts/persistence";
 
 export interface CreateCustomerDto {
   organizationId: string;
@@ -75,7 +75,7 @@ setCustomers((current) => [
 
 
   async function updateCustomer(
-  id: string,
+  id: EntityId,
   data: UpdateCustomerDto
 ) {
 
@@ -103,7 +103,7 @@ setCustomers((current) =>
 
 
   async function archiveCustomer(
-    id: string
+    id: EntityId
   ) {
 
 const result =
@@ -127,7 +127,7 @@ setCustomers((current) =>
 
 
   async function restoreCustomer(
-  id: string
+  id: EntityId
 ) {
 
   const result =
@@ -151,7 +151,7 @@ setCustomers((current) =>
 
 
   async function toggleCustomerStatus(
-    id: string
+    id: EntityId
   ) {
 
     const customer =
