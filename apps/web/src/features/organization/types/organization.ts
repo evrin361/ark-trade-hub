@@ -6,12 +6,13 @@
  * Organization
  * ============================================================
  */
+import type { EntityId } from "@/contracts/persistence";
 
 export interface Organization {
   /**
    * Internal Identifier
    */
-  id: string;
+  id: EntityId;
 
   /**
    * Business Information
