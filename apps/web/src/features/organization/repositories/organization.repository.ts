@@ -4,7 +4,7 @@ export interface OrganizationRepository {
   getAll(): Promise<Organization[]>;
 
   getById(
-    id: string
+    id: Organization["id"]
   ): Promise<Organization | undefined>;
 
   create(
@@ -16,6 +16,6 @@ export interface OrganizationRepository {
   ): Promise<Organization>;
 
   delete(
-    id: string
+    id: Organization["id"]
   ): Promise<void>;
 }
