@@ -12,10 +12,15 @@ import type {
 export class CustomerRepositoryImpl
   implements CustomerRepository {
 
+  private customers: Customer[] = [];
+
   async getAll(): Promise<
     CollectionResult<Customer, PersistenceError>
   > {
-    throw new Error("Not implemented.");
+    return {
+      success: true,
+      data: [...this.customers],
+    };
   }
 
   async getById(
@@ -23,7 +28,12 @@ export class CustomerRepositoryImpl
   ): Promise<
     Result<Customer | undefined, PersistenceError>
   > {
-    throw new Error("Not implemented.");
+    return {
+      success: true,
+      data: this.customers.find(
+        customer => customer.id.value === id.value
+      ),
+    };
   }
 
   async create(
@@ -31,7 +41,12 @@ export class CustomerRepositoryImpl
   ): Promise<
     Result<Customer, PersistenceError>
   > {
-    throw new Error("Not implemented.");
+    this.customers.push(customer);
+
+    return {
+      success: true,
+      data: customer,
+    };
   }
 
   async update(
@@ -39,7 +54,20 @@ export class CustomerRepositoryImpl
   ): Promise<
     Result<Customer, PersistenceError>
   > {
-    throw new Error("Not implemented.");
+    const index =
+      this.customers.findIndex(
+        current =>
+          current.id.value === customer.id.value
+      );
+
+    if (index >= 0) {
+      this.customers[index] = customer;
+    }
+
+    return {
+      success: true,
+      data: customer,
+    };
   }
 
   async delete(
@@ -47,6 +75,15 @@ export class CustomerRepositoryImpl
   ): Promise<
     Result<void, PersistenceError>
   > {
-    throw new Error("Not implemented.");
+    this.customers =
+      this.customers.filter(
+        customer =>
+          customer.id.value !== id.value
+      );
+
+    return {
+      success: true,
+      data: undefined,
+    };
   }
 }
