@@ -48,7 +48,7 @@ export default function RootLayout({
 lang="fa"
 dir="rtl"
 className={`${geistSans.variable} ${geistMono.variable} ${vazirmatn.variable} h-full antialiased`}    >
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-vazir)]">
+      <body className="min-h-full flex flex-col font-(family-name:--font-vazir)">
 <AppShell>
   {children}
 </AppShell>

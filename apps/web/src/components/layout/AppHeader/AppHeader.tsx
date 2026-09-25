@@ -9,7 +9,7 @@ export function AppHeader() {
         border-b
         border-white/10
 
-        bg-white/[0.04]
+        bg-white/4
         backdrop-blur-xl
 
         shadow-[0_8px_30px_rgba(0,0,0,0.20)]
