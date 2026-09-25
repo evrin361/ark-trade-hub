@@ -7,11 +7,18 @@
  * ============================================================
  */
 
+import type { EntityId } from "@/contracts/persistence";
+
 export interface Portfolio {
   /**
    * Internal Identifier
    */
-  id: string;
+  id: EntityId;
+
+  /**
+   * Business Owner
+   */
+  customerId: EntityId;
 
   /**
    * Business Information
