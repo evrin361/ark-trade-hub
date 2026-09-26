@@ -1,10 +1,11 @@
+import type { EntityId } from "@/contracts/persistence";
 import type { Exchange } from "../types/exchange";
 
 export interface ExchangeRepository {
   getAll(): Promise<Exchange[]>;
 
   getById(
-    id: string
+    id: EntityId
   ): Promise<Exchange | undefined>;
 
   create(
@@ -16,6 +17,6 @@ export interface ExchangeRepository {
   ): Promise<Exchange>;
 
   delete(
-    id: string
+    id: EntityId
   ): Promise<void>;
 }

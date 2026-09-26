@@ -1,3 +1,5 @@
+import type { EntityId } from "@/contracts/persistence";
+
 /**
  * ============================================================
  * ARK Trade Hub
@@ -8,28 +10,16 @@
  */
 
 export interface Exchange {
-  /**
-   * Internal Identifier
-   */
-  id: string;
+  id: EntityId;
 
-  /**
-   * Business Information
-   */
   name: string;
 
   code: string;
 
-  /**
-   * Lifecycle
-   */
   enabled: boolean;
 
   archived: boolean;
 
-  /**
-   * Audit
-   */
   createdAt: Date;
 
   updatedAt: Date;
