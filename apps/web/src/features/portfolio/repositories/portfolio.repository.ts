@@ -1,10 +1,11 @@
+import type { EntityId } from "@/contracts/persistence";
 import type { Portfolio } from "../types/portfolio";
 
 export interface PortfolioRepository {
   getAll(): Promise<Portfolio[]>;
 
   getById(
-    id: string
+    id: EntityId
   ): Promise<Portfolio | undefined>;
 
   create(
@@ -16,6 +17,6 @@ export interface PortfolioRepository {
   ): Promise<Portfolio>;
 
   delete(
-    id: string
+    id: EntityId
   ): Promise<void>;
 }
