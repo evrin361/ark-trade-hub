@@ -7,11 +7,20 @@
  * ============================================================
  */
 
+import type { EntityId } from "@/contracts/persistence";
+
 export interface ExchangeAccount {
   /**
    * Internal Identifier
    */
-  id: string;
+  id: EntityId;
+
+  /**
+   * Business Relationships
+   */
+  portfolioId: EntityId;
+
+  exchangeId: EntityId;
 
   /**
    * Business Information
