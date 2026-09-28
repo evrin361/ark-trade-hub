@@ -1,10 +1,11 @@
+import type { EntityId } from "@/contracts/persistence";
 import type { Market } from "../types/market";
 
 export interface MarketRepository {
   getAll(): Promise<Market[]>;
 
   getById(
-    id: string
+    id: EntityId
   ): Promise<Market | undefined>;
 
   create(
@@ -16,6 +17,6 @@ export interface MarketRepository {
   ): Promise<Market>;
 
   delete(
-    id: string
+    id: EntityId
   ): Promise<void>;
 }

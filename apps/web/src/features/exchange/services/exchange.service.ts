@@ -14,6 +14,7 @@ type ServiceResult<T> =
     };
 
 export type CreateExchangeInput = {
+  marketId: EntityId;
   name: string;
   code: string;
 };
@@ -49,9 +50,7 @@ export function createExchangeService(
 
     async getById(
       id: EntityId
-    ): Promise<
-      ServiceResult<Exchange>
-    > {
+    ): Promise<ServiceResult<Exchange>> {
       try {
         const exchange =
           await repository.getById(id);
@@ -77,9 +76,7 @@ export function createExchangeService(
 
     async create(
       input: CreateExchangeInput
-    ): Promise<
-      ServiceResult<Exchange>
-    > {
+    ): Promise<ServiceResult<Exchange>> {
       try {
         const now = new Date();
 
@@ -87,6 +84,7 @@ export function createExchangeService(
           id: {
             value: crypto.randomUUID(),
           },
+          marketId: input.marketId,
           name: input.name,
           code: input.code,
           enabled: true,
@@ -112,9 +110,7 @@ export function createExchangeService(
 
     async update(
       input: UpdateExchangeInput
-    ): Promise<
-      ServiceResult<Exchange>
-    > {
+    ): Promise<ServiceResult<Exchange>> {
       try {
         const existing =
           await repository.getById(input.id);
@@ -150,9 +146,7 @@ export function createExchangeService(
 
     async archive(
       id: EntityId
-    ): Promise<
-      ServiceResult<Exchange>
-    > {
+    ): Promise<ServiceResult<Exchange>> {
       try {
         const existing =
           await repository.getById(id);
@@ -188,9 +182,7 @@ export function createExchangeService(
 
     async restore(
       id: EntityId
-    ): Promise<
-      ServiceResult<Exchange>
-    > {
+    ): Promise<ServiceResult<Exchange>> {
       try {
         const existing =
           await repository.getById(id);
@@ -225,9 +217,7 @@ export function createExchangeService(
 
     async toggleStatus(
       id: EntityId
-    ): Promise<
-      ServiceResult<Exchange>
-    > {
+    ): Promise<ServiceResult<Exchange>> {
       try {
         const existing =
           await repository.getById(id);
@@ -262,9 +252,7 @@ export function createExchangeService(
 
     async delete(
       id: EntityId
-    ): Promise<
-      ServiceResult<void>
-    > {
+    ): Promise<ServiceResult<void>> {
       try {
         const existing =
           await repository.getById(id);

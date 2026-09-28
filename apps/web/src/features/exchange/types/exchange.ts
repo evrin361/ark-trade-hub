@@ -11,9 +11,8 @@ import type { EntityId } from "@/contracts/persistence";
 
 export interface Exchange {
   id: EntityId;
-
+  marketId: EntityId;
   name: string;
-
   code: string;
 
   enabled: boolean;
