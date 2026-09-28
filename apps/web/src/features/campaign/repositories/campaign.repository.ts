@@ -1,10 +1,11 @@
+import type { EntityId } from "@/contracts/persistence";
 import type { Campaign } from "../types/campaign";
 
 export interface CampaignRepository {
   getAll(): Promise<Campaign[]>;
 
   getById(
-    id: string
+    id: EntityId
   ): Promise<Campaign | undefined>;
 
   create(
@@ -16,6 +17,6 @@ export interface CampaignRepository {
   ): Promise<Campaign>;
 
   delete(
-    id: string
+    id: EntityId
   ): Promise<void>;
 }
