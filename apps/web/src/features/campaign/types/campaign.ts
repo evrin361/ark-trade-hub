@@ -7,11 +7,13 @@
  * ============================================================
  */
 
+import type { EntityId } from "@/contracts/persistence";
+
 export interface Campaign {
   /**
    * Internal Identifier
    */
-  id: string;
+  id: EntityId;
 
   /**
    * Business Information
