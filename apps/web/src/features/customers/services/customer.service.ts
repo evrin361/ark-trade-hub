@@ -81,7 +81,7 @@ return {
 
   async create(
     data: {
-  organizationId: string;
+  organizationId: EntityId;
   firstName: string;
   lastName: string;
   mobile: string;

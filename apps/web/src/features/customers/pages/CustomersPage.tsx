@@ -41,8 +41,8 @@ const [mobile, setMobile] = useState("");
 const [email, setEmail] = useState("");
 const [code, setCode] = useState("");
 const [editingId, setEditingId] = useState<EntityId | null>(null);
-const DEFAULT_ORGANIZATION_ID =
-  "default-organization";
+const DEFAULT_ORGANIZATION_ID: EntityId =
+  { value: "default-organization" };
 
   return (
     <AppPage

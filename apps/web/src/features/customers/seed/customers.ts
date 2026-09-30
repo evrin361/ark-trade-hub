@@ -6,7 +6,7 @@ export const customerSeed: Customer[] = [
   value: "customer-ebrahim",
 },
 
-organizationId: "organization-default",    
+organizationId: { value: "organization-default" },
     firstName: "ابراهیم",
 
     lastName: "غفاری",

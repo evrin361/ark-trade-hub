@@ -7,7 +7,7 @@ import type { Customer } from "../types/customer";
 import type { EntityId } from "@/contracts/persistence";
 
 export interface CreateCustomerDto {
-  organizationId: string;
+  organizationId: EntityId;
 
   firstName: string;
   lastName: string;

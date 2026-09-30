@@ -14,6 +14,7 @@ type ServiceResult<T> =
     };
 
 export interface CreateCampaignInput {
+  organizationId: EntityId;
   name: string;
   code: string;
 }
@@ -83,6 +84,7 @@ export function createCampaignService(
           id: {
             value: crypto.randomUUID(),
           },
+          organizationId: input.organizationId,
           name: input.name,
           code: input.code,
           enabled: true,

@@ -17,7 +17,7 @@ export interface Customer {
   /**
    * Owner Organization
    */
-organizationId: string;
+organizationId: EntityId;
 
   /**
    * Personal Information

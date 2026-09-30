@@ -14,6 +14,7 @@ export interface Campaign {
    * Internal Identifier
    */
   id: EntityId;
+  organizationId: EntityId;
 
   /**
    * Business Information
