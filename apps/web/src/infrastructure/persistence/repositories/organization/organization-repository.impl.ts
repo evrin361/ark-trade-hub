@@ -20,7 +20,7 @@ export class OrganizationRepositoryImpl
     return {
       success: true as const,
       data: this.organizations.find(
-        organization => organization.id === id
+        organization => organization.id.value === id.value
       ),
     };
   }
@@ -44,7 +44,7 @@ export class OrganizationRepositoryImpl
     const index =
       this.organizations.findIndex(
         current =>
-          current.id === organization.id
+          current.id.value === organization.id.value
       );
 
     if (index >= 0) {
@@ -64,7 +64,7 @@ export class OrganizationRepositoryImpl
     this.organizations =
       this.organizations.filter(
         organization =>
-          organization.id !== id
+          organization.id.value !== id.value
       );
 
     return {

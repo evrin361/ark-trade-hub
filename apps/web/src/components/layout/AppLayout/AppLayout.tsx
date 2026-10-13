@@ -5,6 +5,7 @@ import {
   Plug,
   Brain,
   Users,
+  Building2,
 } from "lucide-react";
 
 
@@ -22,6 +23,12 @@ const navigation = [
   label: "پراوایدرها",
   href: "/system-configuration/providers",
   icon: <Plug size={18} />,
+},
+{
+  id: "organizations",
+  label: "سازمان‌ها",
+  href: "/system-configuration/organizations",
+  icon: <Building2 size={18} />,
 },
 {
   id: "customers",

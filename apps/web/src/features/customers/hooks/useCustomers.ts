@@ -58,21 +58,25 @@ setLoading(false);
   async function createCustomer(
     data: CreateCustomerDto
   ) {
-const DEFAULT_ORGANIZATION_ID = "default-organization";
 
 const result =
   await customerService.create(data);
 
 if (!result.success) {
-  return;
+  return result;
 }
 
 setCustomers((current) => [
   ...current,
   result.data,
-]);  }
+]);
+
+  return result;
 
 
+
+
+  }
 
   async function updateCustomer(
   id: EntityId,
@@ -87,20 +91,24 @@ const result =
 
 
 if (!result.success) {
-  return;
+  return result;
 }
 
 
 setCustomers((current) =>
   current.map((customer) =>
-    customer.id === id
+    customer.id.value === id.value
       ? result.data
       : customer
   )
 );
+
+  return result;
+
+
+
+
   }
-
-
 
   async function archiveCustomer(
     id: EntityId
@@ -111,17 +119,18 @@ const result =
 
 
 if (!result.success) {
-  return;
+  return result;
 }
 
 
 setCustomers((current) =>
   current.map((customer) =>
-    customer.id === id
+    customer.id.value === id.value
       ? result.data
       : customer
   )
 );
+return result;
   }
 
 
@@ -135,17 +144,18 @@ setCustomers((current) =>
 
 
   if (!result.success) {
-    return;
-  }
+  return result;
+}
 
 
   setCustomers((current) =>
     current.map((customer) =>
-      customer.id === id
+      customer.id.value === id.value
         ? result.data
         : customer
     )
   );
+  return result;
 }
 
 
@@ -156,7 +166,7 @@ setCustomers((current) =>
 
     const customer =
       customers.find(
-        (item) => item.id === id
+        (item) => item.id.value === id.value
       );
 
 
@@ -175,17 +185,18 @@ setCustomers((current) =>
 
 
 if (!result.success) {
-  return;
+  return result;
 }
 
 
 setCustomers((current) =>
   current.map((customer) =>
-    customer.id === id
+    customer.id.value === id.value
       ? result.data
       : customer
   )
 );
+return result;
   }
 
 

@@ -1,18 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppPage } from "@/components/ui/AppPage";
 import { Card } from "@/components/ui/Card";
-import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Button } from "@/components/ui/Button";
 import { CustomersTable } from "../components/CustomersTable";
 import type { EntityId } from "@/contracts/persistence";
+import type { Organization } from "@/features/organization";
+import { createListOrganizationsUseCase } from "@/application/organization/list-organizations.use-case";
 
 import {
-  Pencil,
-  Archive,
-  Power,
   UserPlus,
-  Plus,
   X,
   Save,
 } from "lucide-react";
@@ -20,7 +17,6 @@ import {
 import { useCustomers } from "../hooks/useCustomers";
 import { Input } from "@/components/ui/Input";
 import { FormField } from "@/components/ui/FormField";
-import { ArchiveBadge } from "@/components/ui/ArchiveBadge/ArchiveBadge";
 
 export function CustomersPage() {
 
@@ -33,6 +29,41 @@ export function CustomersPage() {
   restoreCustomer,
 } = useCustomers();
 
+const [organizations, setOrganizations] = useState<Organization[]>([]);
+const [selectedOrganizationId, setSelectedOrganizationId] = useState("");
+const [organizationError, setOrganizationError] = useState("");
+
+useEffect(() => {
+  let active = true;
+
+  async function loadOrganizations() {
+    try {
+      const result = await createListOrganizationsUseCase().execute();
+      if (!active) return;
+
+      if (result.success) {
+        setOrganizations(result.data);
+        setOrganizationError("");
+      } else {
+        setOrganizationError(result.error);
+      }
+    } catch {
+      if (active) setOrganizationError("بارگیری سازمان‌ها انجام نشد.");
+    }
+  }
+
+  void loadOrganizations();
+  return () => { active = false; };
+}, []);
+
+const selectedOrganization = organizations.find(
+  (organization) => organization.id.value === selectedOrganizationId
+);
+
+const visibleCustomers = customers.filter(
+  (customer) => customer.organizationId.value === selectedOrganizationId
+);
+
 const [showForm, setShowForm] = useState(false);
 
 const [firstName, setFirstName] = useState("");
@@ -41,8 +72,7 @@ const [mobile, setMobile] = useState("");
 const [email, setEmail] = useState("");
 const [code, setCode] = useState("");
 const [editingId, setEditingId] = useState<EntityId | null>(null);
-const DEFAULT_ORGANIZATION_ID: EntityId =
-  { value: "default-organization" };
+  const [customerError, setCustomerError] = useState("");
 
   return (
     <AppPage
@@ -69,6 +99,48 @@ const DEFAULT_ORGANIZATION_ID: EntityId =
 
     >
 
+
+<div className="mb-6">
+
+  <label className="mb-2 block text-sm font-medium text-right" htmlFor="customer-organization">
+    سازمان فعال
+  </label>
+  <select
+    id="customer-organization"
+    dir="rtl"
+     style={{ colorScheme: "dark" }}
+    className="w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-right text-[var(--text-primary)]"
+    value={selectedOrganizationId}
+    onChange={(event) => {
+      setSelectedOrganizationId(event.target.value);
+      setEditingId(null);
+      setShowForm(false);
+      setFirstName("");
+      setLastName("");
+      setMobile("");
+      setEmail("");
+      setCode("");
+    }}
+  >
+    <option value=""  className="bg-[var(--surface)] text-[var(--text-primary)]">
+      یک سازمان را انتخاب کنید
+    </option>
+    {organizations.filter((organization) => organization.enabled && !organization.archived).map((organization) => (
+      <option
+        key={organization.id.value}
+        value={organization.id.value}
+        className="bg-[var(--surface)] text-[var(--text-primary)]">
+        {organization.name} ({organization.code})
+      </option>
+    ))}
+  </select>
+  {organizationError && <p role="alert" className="mt-2 text-sm text-red-600">{organizationError}</p>}
+  {!organizationError && organizations.length === 0 && (
+    <p className="mt-2 text-sm opacity-70">
+      پیش از افزودن مشتری، ابتدا یک سازمان ایجاد کنید.
+    </p>
+  )}
+</div>
 
 {showForm && (
   <Card className="mb-6">
@@ -152,50 +224,60 @@ const DEFAULT_ORGANIZATION_ID: EntityId =
       </div>
 
 
+       {customerError && <p role="alert" className="mb-3 text-sm text-red-600">{customerError}</p>}
       <div className="flex justify-end pt-2">
 
        <Button
   className="flex items-center gap-2"
-  onClick={() => {
+  onClick={async () => {
+    setCustomerError("");
 
-    if (!firstName.trim()) return;
-    if (!lastName.trim()) return;
-    if (!mobile.trim()) return;
-    if (!email.trim()) return;
-    if (!code.trim()) return;
-
+    if (!firstName.trim() || !lastName.trim() || !mobile.trim() || !email.trim() || !code.trim()) {
+      setCustomerError("لطفاً همهٔ فیلدهای ضروری مشتری را تکمیل کنید.");
+      return;
+    }
 
     if (editingId) {
-  updateCustomer(
-    editingId,
-    {
-      firstName,
-      lastName,
-      mobile,
-      email,
-      code,
-    }
-  );
-} else {
-  createCustomer({
-  organizationId: DEFAULT_ORGANIZATION_ID,
-  firstName,
-  lastName,
-  mobile,
-  email,
-  code,
-});
-}
+      const result = await updateCustomer(editingId, {
+        firstName,
+        lastName,
+        mobile,
+        email,
+        code,
+      });
 
+      if (!result.success) {
+        setCustomerError(result.error);
+        return;
+      }
+    } else {
+      if (!selectedOrganization) {
+        setCustomerError("پیش از ایجاد مشتری، یک سازمان انتخاب کنید.");
+        return;
+      }
+
+      const result = await createCustomer({
+        organizationId: selectedOrganization.id,
+        firstName,
+        lastName,
+        mobile,
+        email,
+        code,
+      });
+
+      if (!result.success) {
+        setCustomerError(result.error);
+        return;
+      }
+    }
 
     setFirstName("");
     setLastName("");
     setMobile("");
     setEmail("");
     setCode("");
-setEditingId(null);
+    setEditingId(null);
     setShowForm(false);
-
   }}
 >
   <Save size={16} />
@@ -209,7 +291,7 @@ setEditingId(null);
 )}
 
 <CustomersTable
-  customers={customers}
+  customers={visibleCustomers}
 
   onEdit={(customer) => {
 
@@ -227,8 +309,8 @@ setEditingId(null);
 
   onToggleStatus={(id) => {
 
-    const customer = customers.find(
-      (item) => item.id === id
+    const customer = visibleCustomers.find(
+      (item) => item.id.value === id.value
     );
 
     if (!customer) return;
