@@ -5,3 +5,4 @@ export type {
 export {
   createPortfolioService,
 } from "./services/portfolio.service";
+export { PortfoliosPage } from "./pages/PortfoliosPage";

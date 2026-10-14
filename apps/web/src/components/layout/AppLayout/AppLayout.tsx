@@ -6,6 +6,7 @@ import {
   Brain,
   Users,
   Building2,
+  BriefcaseBusiness,
 } from "lucide-react";
 
 
@@ -20,7 +21,7 @@ const navigation = [
 
   {
   id: "providers",
-  label: "پراوایدرها",
+  label: "ارائه‌دهندگان",
   href: "/system-configuration/providers",
   icon: <Plug size={18} />,
 },
@@ -35,6 +36,12 @@ const navigation = [
   label: "مشتریان",
   href: "/customers",
   icon: <Users size={18} />,
+},
+{
+  id: "portfolios",
+  label: "پرتفوی‌ها",
+  href: "/portfolios",
+  icon: <BriefcaseBusiness size={18} />,
 },
 
 
