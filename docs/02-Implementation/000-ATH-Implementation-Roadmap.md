@@ -345,7 +345,7 @@ Completed
 
 **ATH-DOC-012 — Implementation Roadmap Status Synchronization**
 
-**Status:** Awaiting Architecture Center review and formal acceptance. Not yet committed, pushed, or merged.
+**Status:** Committed and pushed to docs/ath-doc-012-roadmap-status-sync; awaiting Architecture Center review and formal acceptance. Not yet merged.
 
 **Architecture Baseline:** ATH-ARC-410 — Repository Boundary Translation Architecture.
 
