@@ -110,7 +110,7 @@ Convert customer management from direct implementation into scalable architectur
 
 Status:
 
-In Progress
+In Progress - implementation continues; formal phase completion unverified.
 
 
 ## Tasks
@@ -144,7 +144,7 @@ In Progress
 | ATH-DOC-005 | Repository Resolution Architecture Synchronization | Completed |
 | ATH-ARC-360 | Runtime Resolution Architecture | Completed |
 | ATH-DOC-006 | Runtime Resolution Architecture Synchronization | Completed |
-| ATH-IMP-021 | Customer Repository Foundation | Ready for Implementation |
+| ATH-IMP-021 | Customer Repository Foundation | Merged; formal completion unverified |
 | ATH-ARC-370 | Repository Foundation Integration Architecture | Completed |
 | ATH-DOC-007 | Repository Foundation Synchronization | Completed |
 | ATH-IMP-022 | Repository Foundation Integration Validation | Completed |
@@ -154,6 +154,19 @@ In Progress
 | ATH-ARC-400 | Entity Identity Value Object Architecture | Approved |
 | ATH-ARC-410 | Repository Boundary Translation Architecture | Approved |
 | ATH-DOC-011 | Repository Boundary Translation Synchronization | Completed |
+| ATH-IMP-023 | Persistence Execution Foundation | Merged; report not located |
+| ATH-IMP-024 | Organization Repository Translation Boundary | Merged; report not located |
+| ATH-IMP-025 | Organization Management Application Workflow | Merged; report not located |
+| ATH-IMP-026 | Customer Persistence Execution | Merged; report not located |
+| ATH-IMP-027 | Portfolio Business Capability | Merged; report not located |
+| ATH-IMP-028 | Exchange Business Capability | Merged; report not located |
+| ATH-IMP-029 | Exchange Account Business Capability | Merged; report not located |
+| ATH-IMP-030 | Market Business Capability | Merged; report not located |
+| ATH-IMP-031 | Campaign Business Capability | Merged; report not located |
+| ATH-IMP-032 | Trade Business Capability | Merged; report not located |
+| ATH-IMP-033 | Organization Ownership Alignment | Merged; report not located |
+| ATH-IMP-034 | Organization-Scoped Customer Workflow | Merged; report not located |
+| ATH-IMP-035 | Organization-Scoped Portfolio Workflow | Merged; report not located |
 
 
 ### Architectural Foundation
@@ -177,13 +190,13 @@ Trading operations are performed through Campaigns and Trades without changing o
 
 # 6. Phase 3 — Core Business Modules
 
-Future modules:
+Module status reflects implementation evidence; production readiness is not implied:
 
 ## Trade Campaign
 
 Status:
 
-Pending
+Campaign business capability code merged; operational readiness unverified.
 
 
 Scope:
@@ -201,7 +214,7 @@ Scope:
 
 Status:
 
-Pending
+Exchange and exchange-account capability code merged; live integration and credential handling unverified.
 
 
 Scope:
@@ -216,7 +229,7 @@ Scope:
 
 Status:
 
-Planned
+Organization workflow implemented; durable persistence and server-side tenant isolation unverified.
 
 Scope:
 
@@ -232,7 +245,7 @@ Scope:
 
 Status:
 
-Planned
+Portfolio capability and organization-scoped workflow implemented; durable persistence and server-side tenant isolation unverified.
 
 Scope:
 
@@ -246,7 +259,7 @@ Scope:
 
 Status:
 
-Pending
+Trade and campaign business capability code merged; live exchange execution unverified.
 
 
 Scope:
@@ -328,17 +341,22 @@ Completed
 
 # 8. Active Tasks
 
-Current active task:
+### Current Documentation Task
 
-ATH-IMP-021 — Customer Repository Foundation
+**ATH-DOC-012 — Implementation Roadmap Status Synchronization**
 
-Current Status:
+**Status:** Awaiting Architecture Center review and formal acceptance. Not yet committed, pushed, or merged.
 
-Ready for Implementation
+**Architecture Baseline:** ATH-ARC-410 — Repository Boundary Translation Architecture.
 
-Architecture Baseline Completed (ATH-ARC-410)
+### Next Mission Candidate
+
+**ATH-IMP-036 — Organization-Scoped Exchange Account Workflow**
+
+**Status:** Proposed — Pending Architecture Center review and explicit approval.
+
+No subsequent implementation mission is formally approved by this roadmap update.
 ---
-
 # 9. Completed Tasks
 
 | Task | Commit | Status |
