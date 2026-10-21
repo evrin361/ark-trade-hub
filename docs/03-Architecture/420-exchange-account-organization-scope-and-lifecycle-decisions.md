@@ -18,7 +18,7 @@ This ADR consolidates the architecture decisions governing Organization-scoped E
 
 It establishes binding architectural requirements while distinguishing confirmed decisions from implementation details that require further technical evidence.
 
-This ADR does not authorize implementation, repository modification, deployment, or changes to persistence infrastructure.
+This ADR records approved architectural decisions but does not authorize implementation, deployment, data mutation, or changes to persistence infrastructure.
 
 ## 2. Architectural Context and Evidence
 
@@ -238,8 +238,6 @@ Identify available tests, test scripts, commands, required environment, and evid
 
 ## 16. Relationship to Decisions D1–D8
 
-This consolidated ADR records the architecture decisions approved during the architecture-review conversation:
-
 - D1 — Trusted Identity and Organization Context.
 - D2 — Organization-Scoped Authorization.
 - D3 — Ownership-Chain Validation.
@@ -249,13 +247,12 @@ This consolidated ADR records the architecture decisions approved during the arc
 - D7 — Operation Result and Error Contract.
 - D8 — Testability and Acceptance Evidence.
 
-The architecture decisions D1-D8 were approved during architecture review. This consolidated ADR is being recorded as an architecture decision draft; the outstanding technical evidence questions remain open.
+This consolidated ADR records the architecture decisions approved during the architecture-review conversation. D1–D8 are approved; the outstanding technical evidence questions remain open.
 
 ## 17. Change Control and Implementation Authorization
 
-- No implementation is authorized by this ADR draft.
+- This ADR does not authorize implementation.
 - Recording this ADR in Git does not authorize implementation or deployment.
-- Commit and push of the reviewed documentation changes may proceed under the user's explicit authorization. Implementation, merge, deployment, and data mutation remain unauthorized.
 - Any implementation must follow the approved repository architecture and must be explicitly authorized separately.
 - Technical findings must distinguish verified evidence, remaining uncertainty, and recommendations.
 - Any proposed change to the architectural decisions above requires explicit review rather than silent deviation.
