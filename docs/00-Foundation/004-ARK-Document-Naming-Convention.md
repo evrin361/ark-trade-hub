@@ -148,7 +148,7 @@ ATH-IMP-110
 
 ---
 
-### Architecture Decision Records (Future)
+### Architecture Decision Records
 
 Prefix:
 
@@ -157,6 +157,17 @@ ATH-ADR
 Example:
 
 ATH-ADR-001
+
+### Architecture Decision Record Numbering
+
+Architecture Decision Records use the `ATH-ADR` Document ID prefix. The three-digit numeric portion of an ADR's Document ID must match the numeric portion of its filename, as required by Section 7.
+
+For ADRs stored in `docs/03-Architecture/`, the numeric identifier must be coordinated with the architecture document sequence to avoid filename/Document ID mismatches. For example:
+
+- Filename: `420-exchange-account-organization-scope-and-lifecycle-decisions.md`
+- Document ID: `ATH-ADR-420`
+
+This convention does not, by itself, grant approval to create an ADR or establish the approval status of any architectural decision. Document numbering and architecture approval are separate concerns.
 
 ---
 
