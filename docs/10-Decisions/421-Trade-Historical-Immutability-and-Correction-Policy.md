@@ -8,7 +8,7 @@
 | Category | Architecture Decision Record |
 | Title | Trade Historical Immutability and Correction Policy |
 | Version | 1.0.0 |
-| Status | Architecture Approved — Publication Pending |
+| Status | Architecture Approved — Published |
 | Owner | ARK Engineering |
 | Project | ARK Trade Hub (`ark-trade-hub`) |
 | Repository | `evrin361/ark-trade-hub` |
@@ -16,16 +16,16 @@
 | Related Evidence | ATH-IMP-046, ATH-IMP-047, ATH-IMP-048, ATH-IMP-049 |
 | Implementation Authorization | NOT AUTHORIZED |
 
-> **Proposed canonical path:**
+> **Canonical path:**
 > `docs/10-Decisions/421-Trade-Historical-Immutability-and-Correction-Policy.md`
 >
-> This ADR follows the current documentation convention for new ADRs. ADR-420 remains in its existing legacy location. This draft has not been registered or published.
+> This ADR follows the current documentation convention for new ADRs. ADR-420 remains in its existing legacy location. This ADR is registered at the canonical path shown above and was published on `main` in commit f9899483478055ba1ad41a48d21df442aed36f3e.
 
 ## Revision History
 
 | Version | Date | Description |
 |---|---|---|
-| 1.0.0 | 2026-10-22 | Initial decision package for Trade historical immutability and correction policy; publication pending. |
+| 1.0.0 | 2026-10-22 | Initial decision package for Trade historical immutability and correction policy; published on main in commit f9899483478055ba1ad41a48d21df442aed36f3e. |
 
 ## Table of Contents
 
@@ -226,7 +226,7 @@ Until separate explicit implementation authorization is issued:
 - The detailed design of Option B remains open.
 - Implementation Authorization remains `NOT AUTHORIZED`.
 
-The authorized local documentation operations do not authorize staging or publishing Git changes. A separate explicit publication authorization is required.
+The earlier documentation-registration scope did not itself authorize Git publication. Publication was subsequently completed under separate explicit authorization in commit f9899483478055ba1ad41a48d21df442aed36f3e. This does not authorize implementation.
 
 ## 9. Publication and Documentation-Convention Note
 
@@ -236,11 +236,11 @@ Under ATH-IMP-060, this ADR is authorized to be moved to `docs/10-Decisions/421-
 
 The Architecture Index (`docs/03-Architecture/312-Architecture-Index.md`) is already aligned with the convention and must not be modified under this mission.
 
-Registration and local file relocation do not constitute Git publication. Git publication remains pending separate explicit authorization. This ADR does not authorize implementation, changes to ADR-420, or unrelated repository changes.
+ATH-ADR-421 is registered at its canonical path and published on `main` in commit f9899483478055ba1ad41a48d21df442aed36f3e. Publication does not authorize implementation, changes to ADR-420, or unrelated repository changes.
 
 ## 10. Final Decision Status
 
-Option A and Option B have been approved as architectural direction by the Architecture Command Center. The Architecture Command Center has granted final architecture approval for this ADR. Option B's detailed design remains open. No formal decision ID is recorded here, and none is inferred. Registration and Git publication remain subject to the scope and authorization gates defined for the current mission.
+Option A and Option B have been approved as architectural direction by the Architecture Command Center. The Architecture Command Center has granted final architecture approval for this ADR. Option B's detailed design remains open. No formal decision ID is recorded here, and none is inferred. Registration and Git publication are complete. Implementation remains subject to separate explicit authorization.
 
 `GAP-07: ARCHITECTURAL CONFLICT CONFIRMED`
 
@@ -252,6 +252,6 @@ Option A and Option B have been approved as architectural direction by the Archi
 
 `ADR-420: APPROVED — D1–D8 UNCHANGED`
 
-`PUBLICATION: PENDING`
+`PUBLICATION: PUBLISHED`
 
 `IMPLEMENTATION AUTHORIZATION: NOT AUTHORIZED`

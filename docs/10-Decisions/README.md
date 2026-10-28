@@ -17,11 +17,11 @@ This directory is the canonical location for new Architecture Decision Records (
 | Document ID | Title | Status | Location |
 |---|---|---|---|
 | `ATH-ADR-420` | Exchange Account Organization Scope and Lifecycle Decisions | Architecture decisions approved - technical evidence open; implementation not authorized | [`ADR-420 at its existing path`](../03-Architecture/420-exchange-account-organization-scope-and-lifecycle-decisions.md) |
-| `ATH-ADR-421` | Trade Historical Immutability and Correction Policy | Architecture Approved - Publication Pending; implementation not authorized | [`421-Trade-Historical-Immutability-and-Correction-Policy.md`](421-Trade-Historical-Immutability-and-Correction-Policy.md) |
+| `ATH-ADR-421` | Trade Historical Immutability and Correction Policy | Architecture Approved - Published; implementation not authorized | [`421-Trade-Historical-Immutability-and-Correction-Policy.md`](421-Trade-Historical-Immutability-and-Correction-Policy.md) |
 
 ## Publication status
 
-`ATH-ADR-421` is registered in this local decision register. Git publication remains pending separate explicit authorization. This registration does not authorize implementation or change the approved status of ADR-420.
+`ATH-ADR-421` is registered in this decision register at its canonical path and was published on `main` in commit f9899483478055ba1ad41a48d21df442aed36f3e. Publication does not authorize implementation or change the approved status of ADR-420.
 
 
 ## Maintenance
