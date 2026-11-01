@@ -83,24 +83,4 @@ export class TradeRepositoryImpl
       data: trade,
     };
   }
-
-  async delete(
-    id: EntityId
-  ): Promise<
-    Result<
-      void,
-      PersistenceError
-    >
-  > {
-    this.trades =
-      this.trades.filter(
-        (trade) =>
-          trade.id.value !== id.value
-      );
-
-    return {
-      success: true,
-      data: undefined,
-    };
-  }
 }
