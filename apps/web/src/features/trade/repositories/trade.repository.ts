@@ -9,6 +9,4 @@ export interface TradeRepository {
   create(trade: Trade): Promise<Trade>;
 
   update(trade: Trade): Promise<Trade>;
-
-  delete(id: EntityId): Promise<void>;
 }
