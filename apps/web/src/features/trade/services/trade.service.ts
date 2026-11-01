@@ -280,35 +280,4 @@ export class TradeService {
       };
     }
   }
-
-  async delete(
-    id: EntityId
-  ): Promise<TradeServiceResult<void>> {
-    try {
-      const existing =
-        await this.repository.getById(id);
-
-      if (!existing) {
-        return {
-          success: false,
-          error: "Trade not found.",
-        };
-      }
-
-      await this.repository.delete(id);
-
-      return {
-        success: true,
-        data: undefined,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to delete trade.",
-      };
-    }
-  }
 }
