@@ -26,6 +26,7 @@
 | Version | Date | Description |
 |---|---|---|
 | 1.0.0 | 2026-10-22 | Initial decision package for Trade historical immutability and correction policy; published on main in commit f9899483478055ba1ad41a48d21df442aed36f3e. |
+| 1.1.0 | 2026-11-09 | Recorded approved ADQ-01 and ADQ-02 architecture decisions; implementation remains unauthorized. |
 
 ## Table of Contents
 
@@ -39,6 +40,7 @@
 8.  Scope and Authorization
 9.  Publication and Documentation-Convention Note
 10. Final Decision Status
+11. Architecture Decision Register — Trade Identity and Lifecycle
 
 ## 1. Purpose
 
@@ -237,6 +239,125 @@ Under ATH-IMP-060, this ADR is authorized to be moved to `docs/10-Decisions/421-
 The Architecture Index (`docs/03-Architecture/312-Architecture-Index.md`) is already aligned with the convention and must not be modified under this mission.
 
 ATH-ADR-421 is registered at its canonical path and published on `main` in commit f9899483478055ba1ad41a48d21df442aed36f3e. Publication does not authorize implementation, changes to ADR-420, or unrelated repository changes.
+
+
+
+## 11. Architecture Decision Register — Trade Identity and Lifecycle
+
+This section records subsequent Architecture Command Center decisions
+that refine the principles in this ADR. These approvals are architecture
+principles only. They do not authorize implementation, repository
+changes, schema or persistence changes, tests, dependency changes, or
+Git operations beyond the separately authorized publication of this
+decision record.
+
+### ADQ-01 — Immutable Trade Identity and Ownership References
+
+**Status: APPROVED**
+
+The following Trade references are immutable after Trade creation:
+
+- Trade ID
+- Campaign ID
+- Exchange Account ID
+- Portfolio ID
+
+These references must not be changed through ordinary
+`TradeService.update()` or direct mutation of the original Trade.
+Any future correction to attribution or ownership may only be considered
+through a separate, authorized, traceable correction mechanism that is
+compatible with ADR-420 and preserves the original historical record.
+
+The correction mechanism, its storage model, and its implementation
+remain undecided and require separate design and authorization.
+
+**Open domain semantics:** `Trade.name` and `Trade.code` remain
+unresolved. Their business meanings have not been established.
+No immutability or mutability classification, deletion, renaming, or
+other semantic decision is made for these fields by ADQ-01.
+
+### ADQ-02 — Trade Lifecycle Representation
+
+**Status: CLOSED — APPROVED WITH CONDITIONS**
+
+ADQ-02 establishes three independent business concepts:
+
+1. Execution Lifecycle
+2. Operational Availability
+3. Administrative Lifecycle
+
+The following six decisions are approved:
+
+#### ADQ-02 / D1 — Administrative Archive Semantics
+
+Archive and Restore are purely administrative operations on the Trade
+record's Administrative Lifecycle. Archive must not change Execution
+Lifecycle or imply that execution has stopped or closed. Restore changes
+only Administrative Lifecycle from Archived to Active. Restore must not
+automatically Enable the Trade. Archive and Restore must not rewrite
+historical information or execution outcomes. Archived Trades remain
+preserved and reviewable as historical records.
+
+#### ADQ-02 / D2 — Enable/Disable Restrictions
+
+Enable and Disable are permitted only while Administrative Lifecycle
+is Active. They are not permitted while the Trade is Archived. To change
+Operational Availability while Archived, the Trade must first be
+Restored. Restore alone does not Enable the Trade. Administrative
+Lifecycle and Operational Availability remain separate concepts.
+
+#### ADQ-02 / D3 — Closed as a Terminal Execution State
+
+Closed is terminal in Execution Lifecycle. Enable, Disable, Archive,
+and Restore must not move Execution Lifecycle from Closed back to a
+prior execution state. Closure is distinct from Archive and Disable.
+If a Closed Trade requires correction, that correction must use an
+independent Correction process rather than artificially reopening
+execution. This decision does not define every Execution Lifecycle
+transition.
+
+#### ADQ-02 / D4 — Repeated and Concurrent Lifecycle Requests
+
+Repeating a request when its target state already holds must not create
+a false change or corrupt state or history. The operation must return a
+truthful outcome and must not claim that a new change occurred.
+Contradictory or concurrent requests must be handled in a controlled
+manner, and the outcome must reflect the actual persisted state.
+Failures and conflicts must not be reported as success. Technical
+concurrency, retry, and idempotency details remain deferred to
+technical design.
+
+#### ADQ-02 / D5 — Lifecycle Independence
+
+Execution Lifecycle, Operational Availability, and Administrative
+Lifecycle are independent business concepts. A change in any one must
+not implicitly change either of the other two.
+Archived does not mean Disabled; Disabled does not mean Archived;
+Closed does not mean Archived or Disabled. Each change must use an
+operation consistent with its own business meaning.
+
+#### ADQ-02 / D6 — Restore Eligibility
+
+Restore requires valid identity, required authorization, and valid
+ownership and access, consistent with ADR-420. Restore is independent
+of whether the Trade is Enabled or Disabled and whether execution is
+Open or Closed. A Closed and Archived Trade may be administratively
+Restored. Restore changes only Administrative Lifecycle from Archived
+to Active; it does not change Execution Lifecycle or Operational
+Availability.
+
+**Condition for closure:** Detailed Execution Lifecycle state
+transitions must be completed in later domain or technical design.
+This condition does not suspend or reopen the six approved decisions.
+
+### Authorization Boundary
+
+ADQ-01 and ADQ-02 are architecture approvals only. They do not grant
+implementation authorization. No Trade model, service, repository,
+persistence, schema, migration, correction mechanism, test, dependency,
+or application code change is authorized by recording these decisions.
+Implementation Authorization remains **NOT AUTHORIZED** and requires
+a separate explicit authorization.
 
 ## 10. Final Decision Status
 
