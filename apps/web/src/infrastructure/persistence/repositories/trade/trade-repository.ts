@@ -42,12 +42,4 @@ export interface TradeRepository {
     >
   >;
 
-  delete(
-    id: EntityId
-  ): Promise<
-    Result<
-      void,
-      PersistenceError
-    >
-  >;
 }

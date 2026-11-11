@@ -65,14 +65,4 @@ export class TradeRepositoryImpl
     return result.data;
   }
 
-  async delete(
-    id: EntityId
-  ): Promise<void> {
-    const result =
-      await this.repository.delete(id);
-
-    if (!result.success) {
-      throw new Error(result.error.message);
-    }
-  }
 }
